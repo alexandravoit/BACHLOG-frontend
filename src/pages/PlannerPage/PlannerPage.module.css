@@ -1,0 +1,15 @@
+.plannerPage {
+    display: flex;
+    flex-direction: row;
+    padding: 16px;
+    gap: 16px;
+}
+
+.searchBox {
+    flex-grow: 1;
+    min-width: 0;
+}
+
+.semesterGrid {
+    flex-shrink: 0;
+}

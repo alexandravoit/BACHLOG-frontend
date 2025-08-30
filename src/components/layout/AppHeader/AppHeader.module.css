@@ -1,0 +1,14 @@
+.appHeader {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+}
+
+.logo {
+    width: 26px;
+    height: auto;
+    fill: var(--fgColor-default);
+    stroke: var(--fgColor-default);
+}

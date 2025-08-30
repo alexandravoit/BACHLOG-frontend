@@ -1,0 +1,20 @@
+.searchBox {
+    height: fit-content;
+    background-color: var(--bgColor-muted);
+    border-radius: 8px;
+    padding: 16px;
+}
+
+.searchResultBox {
+    width: auto;
+    background-color: var(--bgColor-default);
+    border-radius: 8px;
+    overflow-x: auto;
+    padding: 8px;
+
+    .coursesResult {
+        display: flex;
+        min-width: max-content;
+        gap: 8px;
+    }
+}
