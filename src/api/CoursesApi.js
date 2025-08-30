@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const API_BASE = '/api/courses';
 
-// SEARCH
+// COURSES API
 export const searchCourses = async (query) => {
   try {
     const response = await axios.get(`${API_BASE}/search`, {
@@ -14,6 +14,20 @@ export const searchCourses = async (query) => {
   } catch (error) {
     console.error('Error searching courses:', error);
     throw new Error('Failed to fetch courses');
+  }
+};
+
+export const getCourseSeason = async (query) => {
+  try {
+    const response = await axios.get(`${API_BASE}/season`, {
+      params: {
+        q: query.toUpperCase()
+      }
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error getting course season:', error);
+    throw new Error('Failed to get course season');
   }
 };
 
@@ -67,6 +81,17 @@ export const updateCourseSemester = async (id, semester) => {
     throw new Error('Failed to move course');
   }
 };
+
+export const updateCourseSeason = async (courseId, seasonInfo) => {
+  try {
+    const response = await axios.put(`${API_BASE}/${courseId}/season`, seasonInfo);
+    return response.data;
+  } catch (error) {
+    console.error('Failed to update course season:', error);
+    throw new Error('Failed to update course season');
+  }
+};
+
 
 export const deleteCourse = async (id) => {
   try {

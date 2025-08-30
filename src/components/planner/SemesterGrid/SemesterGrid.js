@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import SemesterBox from './SemesterBox.js';
 import styles from './SemesterGrid.module.css'; 
 import { groupCoursesBySemester } from '../../../utils/CourseUtils.js';
-import { getAllCourses, createCourse, updateCourseSemester } from '../../../api/CoursesApi.js';
+import { getAllCourses, createCourse, updateCourseSemester, getCourseSeason, updateCourseSeason } from '../../../api/CoursesApi.js';
 import { getEmptySemesters } from '../../../constants/Semesters.js';
 
 
@@ -39,18 +39,31 @@ function SemesterGrid() {
     try {
       if (sourceSemesterId) {
         await updateCourseSemester(course.id, targetSemesterId);
+        await loadCoursesFromDatabase();
       } else {
-        await createCourse({
+
+        const newCourse = await createCourse({
           semester: targetSemesterId,
           code: course.code,
           title: course.title.et,
-          credits: course.credits
+          credits: course.credits,
         });
-      }
 
-      await loadCoursesFromDatabase();
+        await loadCoursesFromDatabase();
+        updateNewCourseSeason(newCourse.id, course.code);
+      }
     } catch (error) {
       console.error('Failed to save course:', error);
+    }
+  };
+
+  const updateNewCourseSeason = async (courseId, courseCode) => {
+    try {
+      const seasonInfo = await getCourseSeason(courseCode);
+      await updateCourseSeason(courseId, seasonInfo);
+      await loadCoursesFromDatabase();
+    } catch (error) {
+      console.error("Background season update failed:", error);
     }
   };
 
