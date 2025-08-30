@@ -22,7 +22,7 @@ function SearchResultBox({ courses }) {
       <div className={styles.coursesResult}>
         {courses.map((course) => (
           <CourseBox
-            key={course.code}
+            key={course.CODE}
             course={course}
             onDragStart={(event) => handleDragStart(event, course)}
             draggable={true}

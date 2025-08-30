@@ -1,12 +1,6 @@
 import axios from 'axios';
-import { Course } from '../models/Course.js';
-
 
 const API_BASE = '/api/courses';
-
-const normalizeCourse = (dbCourse) => {
-  return new Course(dbCourse);
-};
 
 // SEARCH
 export const searchCourses = async (query) => {
@@ -27,7 +21,7 @@ export const searchCourses = async (query) => {
 export const getAllCourses = async () => {
   try {
     const response = await axios.get(API_BASE);
-    return response.data.map(normalizeCourse);
+    return response.data;
   } catch (error) {
     console.error('Failed to fetch courses:', error);
     throw new Error('Failed to load courses');
@@ -37,7 +31,7 @@ export const getAllCourses = async () => {
 export const getCourseById = async (id) => {
   try {
     const response = await axios.get(`${API_BASE}/${id}`);
-    return response.data.map(normalizeCourse);
+    return response.data;
   } catch (error) {
     console.error('Failed to fetch course:', error);
     throw new Error('Course not found');
@@ -47,7 +41,7 @@ export const getCourseById = async (id) => {
 export const getCoursesBySemester = async (semester) => {
   try {
     const response = await axios.get(`${API_BASE}/semester/${semester}`);
-    return response.data.map(normalizeCourse);
+    return response.data;
   } catch (error) {
     console.error('Failed to fetch courses by semester:', error);
     throw new Error('Failed to load semester courses');
