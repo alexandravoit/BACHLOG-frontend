@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Stack, FormControl, TextInput } from '@primer/react';
-import { SearchIcon } from '@primer/octicons-react';
+import { Stack, FormControl, TextInput, IconButton } from '@primer/react';
+import { SearchIcon, UploadIcon, CheckIcon } from '@primer/octicons-react'
 import SearchResultBox from './SearchResultBox.js';
 import { searchCourses } from '../../../api/CoursesApi.js';
 import styles from './SearchBox.module.css'
@@ -19,7 +19,7 @@ function SearchBox() {
       setError(null);
       return;
     }
-    
+
     setError(null);
 
     try {
@@ -42,7 +42,13 @@ function SearchBox() {
     <div className={styles.searchBox}>
       <Stack direction="vertical">
         <FormControl>
-          <FormControl.Label>Kursuse otsing</FormControl.Label>
+          <FormControl.Label className={styles.formControlLabel}>
+            <div>Kursuse otsing</div>
+            <div className={styles.actions}>
+              <IconButton icon={UploadIcon} size='small' variant='invisible' aria-label='Lae .csv failina' tooltipDirection='n'/>
+              <IconButton icon={CheckIcon} size='small' variant='invisible' aria-label='Kontrolli' tooltipDirection='n'/>
+            </div>
+          </FormControl.Label>
           <TextInput
             block
             trailingVisual={SearchIcon}
@@ -52,8 +58,7 @@ function SearchBox() {
           />
           {error && <FormControl.Validation variant="error">{error}</FormControl.Validation>}
         </FormControl>
-
-         <SearchResultBox courses={courses} />
+        <SearchResultBox courses={courses} />
       </Stack>
     </div>
   );

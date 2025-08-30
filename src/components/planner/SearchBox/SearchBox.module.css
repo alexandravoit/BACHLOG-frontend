@@ -18,3 +18,14 @@
         gap: 8px;
     }
 }
+
+.formControlLabel {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+
+    .actions {
+        display: flex;
+    }
+}
