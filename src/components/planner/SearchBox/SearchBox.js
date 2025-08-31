@@ -1,8 +1,10 @@
 import { useState } from "react";
-import { Stack, FormControl, TextInput, IconButton } from '@primer/react';
-import { SearchIcon, UploadIcon, CheckIcon } from '@primer/octicons-react'
+import { Stack, FormControl, TextInput } from '@primer/react';
+import { SearchIcon } from '@primer/octicons-react'
 import SearchResultBox from './SearchResultBox.js';
 import { searchCourses } from '../../../api/CoursesApi.js';
+import FileUploader from './utils/FileUploader.js'
+import PlanChecker from './utils/PlanChecker.js'
 import styles from './SearchBox.module.css'
 
 function SearchBox() {
@@ -24,6 +26,7 @@ function SearchBox() {
 
     try {
       const results = await searchCourses(trimmedQuery);
+      if (results.length === 0) setError('Kursuseid ei leitud!');
       setCourses(results);
     } catch (err) {
       setError('Kursuseid ei leitud!');
@@ -45,8 +48,8 @@ function SearchBox() {
           <FormControl.Label className={styles.formControlLabel}>
             <div>Kursuse otsing</div>
             <div className={styles.actions}>
-              <IconButton icon={UploadIcon} size='small' variant='invisible' aria-label='Lae .csv failina' tooltipDirection='n'/>
-              <IconButton icon={CheckIcon} size='small' variant='invisible' aria-label='Kontrolli' tooltipDirection='n'/>
+              <FileUploader/>
+              <PlanChecker/>
             </div>
           </FormControl.Label>
           <TextInput
