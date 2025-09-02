@@ -2,7 +2,15 @@ import { useState, useEffect } from 'react';
 import SemesterBox from './SemesterBox.js';
 import styles from './SemesterGrid.module.css'; 
 import { groupCoursesBySemester } from '../../../utils/CourseUtils.js';
-import { getAllCourses, createCourse, updateCourseSemester, getCourseSeason, updateCourseSeason } from '../../../api/CoursesApi.js';
+import {
+    getAllCourses,
+    createCourse,
+    updateCourseSemester,
+    getCourseSeason,
+    updateCourseSeason,
+    getCourseCurricula,
+    updateCourseCurriculum
+} from '../../../api/CoursesApi.js';
 import { getEmptySemesters } from '../../../constants/Semesters.js';
 
 
@@ -50,7 +58,8 @@ function SemesterGrid() {
         });
 
         await loadCoursesFromDatabase();
-        updateNewCourseSeason(newCourse.id, course.code);
+        await updateNewCourseSeason(newCourse.id, course.code);
+        await updateNewCourseCurriculum(newCourse.id, course.uuid);
       }
     } catch (error) {
       console.error('Failed to save course:', error);
@@ -67,6 +76,17 @@ function SemesterGrid() {
     }
   };
 
+    const updateNewCourseCurriculum = async (courseId, courseUuid) => {
+        try {
+            const curriculumInfo = await getCourseCurricula(courseUuid);
+            const curriculum = curriculumInfo.default;
+            await updateCourseCurriculum(courseId, curriculum);
+            await loadCoursesFromDatabase();
+        } catch (error) {
+            console.error("Background curriculum update failed:", error);
+        }
+    };
+
   return (
     <div className={styles.semesterGrid}>
       {semesters.map((semester) => (
@@ -79,5 +99,5 @@ function SemesterGrid() {
       ))}
     </div>
   );
-};
+}
 export default SemesterGrid;

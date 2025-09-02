@@ -31,6 +31,20 @@ export const getCourseSeason = async (query) => {
   }
 };
 
+export const getCourseCurricula = async (courseUuid) => {
+    try {
+        const response = await axios.get(`${API_BASE}/curricula`, {
+            params: {
+                q: courseUuid
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Error getting course curricula:', error);
+        throw new Error('Failed to get course curricula');
+    }
+};
+
 // DATABASE
 export const getAllCourses = async () => {
   try {
@@ -74,7 +88,7 @@ export const createCourse = async (courseData) => {
 
 export const updateCourseSemester = async (id, semester) => {
   try {
-    const response = await axios.put(`${API_BASE}/${id}`, { semester });
+    const response = await axios.put(`${API_BASE}/${id}/semester`, { semester });
     return response.data;
   } catch (error) {
     console.error('Failed to update course:', error);
@@ -91,6 +105,17 @@ export const updateCourseSeason = async (courseId, seasonInfo) => {
     throw new Error('Failed to update course season');
   }
 };
+
+export const updateCourseCurriculum = async (courseId, curriculum) => {
+    try {
+        const response = await axios.put(`${API_BASE}/${courseId}/curriculum`, {curriculum});
+        return response.data;
+    } catch (error) {
+        console.error('Failed to update course curriculum:', error);
+        throw new Error('Failed to update course curriculum');
+    }
+};
+
 
 
 export const deleteCourse = async (id) => {
