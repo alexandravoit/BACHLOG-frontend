@@ -51,10 +51,11 @@ function SemesterGrid() {
       } else {
 
         const newCourse = await createCourse({
-          semester: targetSemesterId,
-          code: course.code,
-          title: course.title.et,
-          credits: course.credits,
+            uuid: course.uuid,
+            semester: targetSemesterId,
+            code: course.code,
+            title: course.title.et,
+            credits: course.credits,
         });
 
         await loadCoursesFromDatabase();
