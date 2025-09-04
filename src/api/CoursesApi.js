@@ -116,8 +116,6 @@ export const updateCourseCurriculum = async (courseId, curriculum) => {
     }
 };
 
-
-
 export const deleteCourse = async (id) => {
   try {
     const response = await axios.delete(`${API_BASE}/${id}`);
@@ -128,3 +126,21 @@ export const deleteCourse = async (id) => {
   }
 };
 
+// CSV PARSER
+export const parseCsv = async (file) => {
+    try {
+        const formData = new FormData();
+        formData.append('csv', file);
+
+        const response = await axios.post(`${API_BASE}/parser`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        });
+
+        return response.data;
+    } catch (error) {
+        console.error('CSV upload failed:', error);
+        throw new Error(error.response?.data?.error || 'Failed to upload CSV file');
+    }
+};
