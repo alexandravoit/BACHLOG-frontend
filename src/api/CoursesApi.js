@@ -144,3 +144,26 @@ export const parseCsv = async (file) => {
         throw new Error(error.response?.data?.error || 'Failed to upload CSV file');
     }
 };
+
+// CHECKER
+
+export const checkCourse = async (courseId) => {
+    try {
+        const response = await axios.get(`${API_BASE}/${courseId}/check`);
+        return response.data;
+    } catch (error) {
+        console.error('Error checking course:', error);
+        throw error.response?.data || { error: 'Failed to check course' };
+    }
+};
+
+export const checkCourses = async () => {
+    try {
+        const response = await axios.get(`${API_BASE}/check/all`);
+        console.log('Check response:', response.data);
+        return response.data;
+    } catch (error) {
+        console.error('Error checking all courses:', error);
+        throw error.response?.data || { error: 'Failed to check all courses' };
+    }
+};

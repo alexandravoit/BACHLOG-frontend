@@ -1,6 +1,6 @@
-import { useState } from 'react';
 import { IconButton } from '@primer/react';
 import { CheckIcon } from '@primer/octicons-react';
+import {checkCourses} from "../../../../api/CoursesApi";
 
 function PlanChecker() {
   return (
@@ -11,6 +11,7 @@ function PlanChecker() {
         variant="invisible"
         aria-label="Kontrolli"
         tooltipDirection="n"
+        onClick={checkCourses}
       />
     </div>
   );
