@@ -12,80 +12,85 @@ import {
     updateCourseCurriculum
 } from '../../../api/CoursesApi.js';
 import { getEmptySemesters } from '../../../constants/Semesters.js';
+import { useCourse } from '../../../context';
 
 
 function SemesterGrid() {
+    const { validateCourses } = useCourse();
 
-  const [semesters, setSemesters] = useState(getEmptySemesters()); 
+    const [semesters, setSemesters] = useState(getEmptySemesters());
 
-  useEffect(() => {
-    loadCoursesFromDatabase();
-  }, []);
+    useEffect(() => {
+        loadCoursesFromDatabase();
+        validateCourses();
+    }, [validateCourses]);
 
-  const loadCoursesFromDatabase = async () => {
+    const loadCoursesFromDatabase = async () => {
     try {
-      const courses = await getAllCourses();
-      const groupedSemesters = groupCoursesBySemester(courses);
-      setSemesters(groupedSemesters);
+    const courses = await getAllCourses();
+    const groupedSemesters = groupCoursesBySemester(courses);
+    setSemesters(groupedSemesters);
     } catch (error) {
-      console.error('Failed to load courses:', error);
+    console.error('Failed to load courses:', error);
     }
-  };
+    };
 
-  const handleCourseDrag = (event, course, sourceSemesterId) => {
+    const handleCourseDrag = (event, course, sourceSemesterId) => {
     event.dataTransfer.setData(
-      "application/json",
-      JSON.stringify({
-        course: course,
-        sourceSemesterId,
-      })
+    "application/json",
+    JSON.stringify({
+    course: course,
+    sourceSemesterId,
+    })
     );
     event.dataTransfer.effectAllowed = "move";
-  };
+    };
 
-  const addCourseToSemester = async (targetSemesterId, course, sourceSemesterId) => {
+    const addCourseToSemester = async (targetSemesterId, course, sourceSemesterId) => {
     try {
-      if (sourceSemesterId) {
-        await updateCourseSemester(course.id, targetSemesterId);
-        await loadCoursesFromDatabase();
-      } else {
+        if (sourceSemesterId) {
+            await updateCourseSemester(course.id, targetSemesterId);
+            await loadCoursesFromDatabase();
+        } else {
+            const newCourse = await createCourse({
+                uuid: course.uuid,
+                semester: targetSemesterId,
+                code: course.code,
+                title: course.title.et,
+                credits: course.credits,
+            });
 
-        const newCourse = await createCourse({
-            uuid: course.uuid,
-            semester: targetSemesterId,
-            code: course.code,
-            title: course.title.et,
-            credits: course.credits,
-        });
-
-        await loadCoursesFromDatabase();
-        await updateNewCourseSeason(newCourse.id, course.code);
-        await updateNewCourseCurriculum(newCourse.id, course.uuid);
-      }
+            await loadCoursesFromDatabase();
+            await updateNewCourseSeason(newCourse.id, course.code);
+            await updateNewCourseCurriculum(newCourse.id, course.uuid);
+        }
+/*        setTimeout(() => {
+            validateCourses();
+        }, 300);*/
     } catch (error) {
-      console.error('Failed to save course:', error);
+    console.error('Failed to save course:', error);
     }
-  };
+    };
 
-  const updateNewCourseSeason = async (courseId, courseCode) => {
+    const updateNewCourseSeason = async (courseId, courseCode) => {
     try {
-      const seasonInfo = await getCourseSeason(courseCode);
-      await updateCourseSeason(courseId, seasonInfo);
-      await loadCoursesFromDatabase();
+    const seasonInfo = await getCourseSeason(courseCode);
+    await updateCourseSeason(courseId, seasonInfo);
+    await loadCoursesFromDatabase();
     } catch (error) {
-      console.error("Background season update failed:", error);
+    console.error("Background season update failed:", error);
     }
-  };
+    };
 
     const updateNewCourseCurriculum = async (courseId, courseUuid) => {
-        try {
-            const curriculumInfo = await getCourseCurricula(courseUuid);
-            const curriculum = curriculumInfo.default;
-            await updateCourseCurriculum(courseId, curriculum);
-            await loadCoursesFromDatabase();
-        } catch (error) {
-            console.error("Background curriculum update failed:", error);
-        }
+    try {
+        const curriculumInfo = await getCourseCurricula(courseUuid);
+        const curriculum = curriculumInfo.default;
+        await updateCourseCurriculum(courseId, curriculum);
+        await loadCoursesFromDatabase();
+    } catch (error) {
+        console.error("Background curriculum update failed:", error);
+    }
     };
 
   return (
