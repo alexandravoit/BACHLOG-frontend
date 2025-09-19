@@ -15,6 +15,11 @@
     font-weight: var(--base-text-weight-semibold);
 }
 
+.hasIssues {
+    border: 1px solid var(--fgColor-danger);
+    color: var(--fgColor-danger);
+}
+
 .courseGrid {
 
     min-height: calc(3 * 72px + 4 * 8px + 2px);

@@ -1,9 +1,21 @@
 import { IconButton } from '@primer/react';
 import { CheckIcon } from '@primer/octicons-react';
-import {checkCourses} from "../../../../api/CoursesApi";
+import { useCourse } from '../../../../context';
+
 
 function PlanChecker() {
-  return (
+
+    const { validateCourses } = useCourse();
+
+    const handleCheck = async () => {
+        try {
+            validateCourses();
+        } catch (error) {
+            console.error('Validation check failed:', error);
+        }
+    };
+
+    return (
     <div>
       <IconButton
         icon={CheckIcon}
@@ -11,9 +23,9 @@ function PlanChecker() {
         variant="invisible"
         aria-label="Kontrolli"
         tooltipDirection="n"
-        onClick={checkCourses}
+        onClick={handleCheck}
       />
     </div>
-  );
+    );
 }
 export default PlanChecker;
