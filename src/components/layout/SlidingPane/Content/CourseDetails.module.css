@@ -1,0 +1,54 @@
+.courseDetails {
+    display: flex;
+    flex-direction: column;
+
+    .header {
+        font-weight: var(--base-text-weight-semibold);
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .labels {
+        margin-top: 8px;
+        display: flex;
+        flex-direction: row;
+        gap: 4px;
+    }
+
+    .issueTitle {
+        display: flex;
+        flex-direction: row;
+        font-weight: var(--base-text-weight-semibold);
+        align-items: center;
+        gap: 4px;
+    }
+
+    .issues {
+        display: flex;
+        flex-direction: column;
+        margin-top: 8px;
+        gap: 8px;
+        color: var(--fgColor-danger);
+
+        .issue {
+            display: flex;
+            flex-direction: column;
+            background-color: var(--bgColor-danger-muted);
+            border-radius: 8px;
+            padding: 8px;
+
+        }
+    }
+
+    .prereqs {
+        display: flex;
+        flex-direction: column;
+        margin-top: 8px;
+        color: var(--fgColor-attention);
+        background-color: var(--bgColor-attention-muted);
+        border-radius: 8px;
+        padding: 8px;
+    }
+}

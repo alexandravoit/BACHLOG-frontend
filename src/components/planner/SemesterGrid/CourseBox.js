@@ -4,7 +4,7 @@ import styles from './SemesterGrid.module.css'
 
 function CourseBox({ course, onDragStart, draggable }) {
 
-    const { getCourseIssues } = useCourse();
+    const { getCourseIssues, openPane } = useCourse();
     const issues = getCourseIssues(course.id);
 
     const handleDragStart = (event) => {
@@ -18,6 +18,7 @@ function CourseBox({ course, onDragStart, draggable }) {
         className={`${styles.courseBox} ${!issues.ok ? styles.hasIssues : ''}`}
         draggable={draggable}
         onDragStart={draggable ? handleDragStart : undefined}
+        onClick={() => openPane(course)} //
     >
       <Text>{course.code}</Text>
     </div>

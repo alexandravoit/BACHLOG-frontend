@@ -13,3 +13,29 @@ export const groupCoursesBySemester = (courses) => {
         };
     });
 };
+
+export const getCourseLabels = (course) => {
+    const labels = [];
+
+    labels.push({
+        id: 'eap',
+        variant: 'secondary',
+        content: `${course.credits} EAP`
+    });
+
+    if (course.isAutumnCourse) {
+        labels.push({
+            id: 'autumn',
+            variant: 'severe',
+            content: 'Sügis'
+        });
+    }
+    if (course.isSpringCourse) {
+        labels.push({
+            id: 'spring',
+            variant: 'success',
+            content: 'Kevad'
+        });
+    }
+    return labels;
+};

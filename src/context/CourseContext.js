@@ -13,6 +13,9 @@ export const useCourse = () => {
 
 export const CourseProvider = ({ children }) => {
     const [validationResults, setValidationResults] = useState({});
+    const [selectedCourse, setSelectedCourse] = useState(null);
+    const [isPaneOpen, setIsPaneOpen] = useState(false);
+
 
     const validateCourses = useCallback(async () => {
         try {
@@ -30,10 +33,26 @@ export const CourseProvider = ({ children }) => {
         return validationResults[courseId] || { ok: true };
     };
 
+    const openPane = (course) => {
+        if (course && course.id) {
+            setSelectedCourse(course);
+            setIsPaneOpen(true);
+        }
+    };
+
+    const closePane = () => {
+        setIsPaneOpen(false);
+        setSelectedCourse(null);
+    };
+
     const value = {
         validationResults,
         validateCourses,
-        getCourseIssues
+        getCourseIssues,
+        selectedCourse,
+        isPaneOpen,
+        openPane,
+        closePane,
     };
 
     return (
