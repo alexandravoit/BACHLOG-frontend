@@ -1,19 +1,22 @@
 import React from 'react';
 import styles from './CourseDetails.module.css';
+import globalStyles from '../../../../global.module.css';
 import {Label, Text} from '@primer/react';
 import {AlertIcon, InfoIcon} from '@primer/octicons-react'
 import { getCourseLabels } from "../../../../utils/CourseUtils";
 import { useCourse } from '../../../../context';
+import CurriculumSelector from './utils/CurriculumSelector';
 
 function CourseDetails({ course }) {
     const labels = getCourseLabels(course);
-    const { getCourseIssues } = useCourse();
+    const { courses, getCourseIssues, refreshCourse } = useCourse();
+    const courseData = courses[course.id] || course;
     const issues =  getCourseIssues(course.id);
 
     const renderPrereqs = (prereqs) => {
         if (!prereqs) return null;
         return (
-            <div className={styles.prereqs}>
+            <div className={styles.prereq}>
                 <div className={styles.issueTitle}>
                     <InfoIcon size={12}/>
                     <Text size={'small'}>Eeldusained</Text>
@@ -28,10 +31,9 @@ function CourseDetails({ course }) {
     const renderIssues = () => {
         if (issues.ok) return null;
         return (
-            <div>
+            <div className={styles.issues}>
                 {issues.issues.map((issue, index) => (
                     <React.Fragment key={index}>
-                        <div className={styles.issues}>
                             <div className={styles.issue}>
                                 <div className={styles.issueTitle}>
                                     <AlertIcon size={12}/>
@@ -39,8 +41,6 @@ function CourseDetails({ course }) {
                                 </div>
                                 <Text size={'small'}>{issue.message}</Text>
                             </div>
-                        </div>
-
                         {renderPrereqs(issue.prereqs)}
                     </React.Fragment>
                 ))}
@@ -50,11 +50,11 @@ function CourseDetails({ course }) {
 
     return (
         <div className={styles.courseDetails}>
-            <div className={styles.header}>
-                <Text size={'large'}>{course.title}</Text>
-            </div>
 
-            <Text>{course.code}</Text>
+            <div className={styles.header}>
+                <Text size={'large'} weight={'semibold'}>{course.title}</Text>
+                <Text>{course.code}</Text>
+            </div>
 
             <div className={styles.labels}>
                 {labels.map(label => (
@@ -63,7 +63,17 @@ function CourseDetails({ course }) {
                     </Label>
                 ))}
             </div>
+
             {renderIssues()}
+
+            <div className={globalStyles.divider} />
+
+            <div className={styles.selectors}>
+                <div className={styles.selector}>
+                    <Text size={'small'} weight={'semibold'}>Õppekava</Text>
+                    <CurriculumSelector course={courseData} onCurriculumUpdated={refreshCourse} />
+                </div>
+            </div>
         </div>
     );
 }

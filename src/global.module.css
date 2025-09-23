@@ -2,3 +2,10 @@
     min-height: 100vh;
     background-color: var(--bgColor-default);
 }
+
+.divider {
+    height: 2px;
+    background-color: var(--borderColor-muted);
+    border-radius: 8px;
+    width: 100%;
+}

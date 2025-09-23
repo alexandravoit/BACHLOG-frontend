@@ -1,5 +1,5 @@
 import React, {createContext, useCallback, useContext, useState} from 'react';
-import {checkCourses} from "../api/CoursesApi";
+import {checkCourses, getCourseById} from "../api/CoursesApi";
 
 const CourseContext = createContext();
 
@@ -15,7 +15,18 @@ export const CourseProvider = ({ children }) => {
     const [validationResults, setValidationResults] = useState({});
     const [selectedCourse, setSelectedCourse] = useState(null);
     const [isPaneOpen, setIsPaneOpen] = useState(false);
+    const [courses, setCourses] = useState({});
 
+    const refreshCourse = async (courseId) => {
+        try {
+            const course = await getCourseById(courseId);
+            setCourses(prev => ({ ...prev, [courseId]: course }));
+            return course;
+        } catch (err) {
+            console.error('Failed to refresh course:', err);
+            return null;
+        }
+    };
 
     const validateCourses = useCallback(async () => {
         try {
@@ -53,6 +64,8 @@ export const CourseProvider = ({ children }) => {
         isPaneOpen,
         openPane,
         closePane,
+        courses,
+        refreshCourse,
     };
 
     return (
