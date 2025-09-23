@@ -1,0 +1,47 @@
+.courseBox {
+    width: 72px;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    background-color: var(--bgColor-default);
+    border: 1px solid;
+    font-size: 8px;
+    font-weight: var(--base-text-weight-semibold);
+}
+
+.none {
+    border-color: var(--borderColor-muted);
+    color: var(--fgColor-muted);
+}
+.pm {
+    border-color: #3b82f6;
+    color: #3b82f6;
+}
+.vm {
+    border-color: #10b981;
+    color: #10b981;
+}
+.sm {
+    border-color: #f59e0b;
+    color: #f59e0b;
+}
+.em {
+    border-color: #8b5cf6;
+    color: #8b5cf6;
+}
+.va {
+    border-color: #ec4899;
+    color: #ec4899;
+}
+.lm {
+    border-color: #ef4444;
+    color: #ef4444;
+}
+
+.issues {
+    border-color: var(--fgColor-danger);
+    color: var(--fgColor-danger);
+}

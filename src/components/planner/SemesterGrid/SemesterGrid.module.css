@@ -1,27 +1,4 @@
-.courseBox {
-
-    width: 72px;
-    aspect-ratio: 1 / 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border-radius: 8px;
-    background-color: var(--bgColor-default);
-    border: var(--borderColor-muted) 1px solid;
-
-    color: var(--fgColor-muted);
-    font-size: 8px;
-    font-weight: var(--base-text-weight-semibold);
-}
-
-.hasIssues {
-    border: 1px solid var(--fgColor-danger);
-    color: var(--fgColor-danger);
-}
-
 .courseGrid {
-
     min-height: calc(3 * 72px + 4 * 8px + 2px);
     min-width: calc(3 * 72px + 4 * 8px + 2px);
 
