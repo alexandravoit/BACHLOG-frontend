@@ -34,6 +34,7 @@ export default function CurriculumSelector({ course, onCurriculumUpdated }) {
 
     return (
         <FormControl>
+            <FormControl.Label visuallyHidden>Õppekava</FormControl.Label>
             <Select size='small' sx={{ width: '100%' }} value={selected} onChange={handleChange}>
                 {curricula.map((c) => (
                     <Select.Option key={c} value={c}>

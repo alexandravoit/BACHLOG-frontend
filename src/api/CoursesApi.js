@@ -116,6 +116,16 @@ export const updateCourseCurriculum = async (courseId, curriculum) => {
     }
 };
 
+export const updateCourseModule = async (courseId, module) => {
+    try {
+        const response = await axios.put(`${API_BASE}/${courseId}/module`, {module});
+        return response.data;
+    } catch (error) {
+        console.error('Failed to update course module:', error);
+        throw new Error('Failed to update course module');
+    }
+};
+
 export const deleteCourse = async (id) => {
   try {
     const response = await axios.delete(`${API_BASE}/${id}`);

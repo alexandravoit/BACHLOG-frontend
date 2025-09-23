@@ -6,6 +6,7 @@ import {AlertIcon, InfoIcon} from '@primer/octicons-react'
 import { getCourseLabels } from "../../../../utils/CourseUtils";
 import { useCourse } from '../../../../context';
 import CurriculumSelector from './utils/CurriculumSelector';
+import ModuleSelector from "./utils/ModuleSelector";
 
 function CourseDetails({ course }) {
     const labels = getCourseLabels(course);
@@ -72,6 +73,10 @@ function CourseDetails({ course }) {
                 <div className={styles.selector}>
                     <Text size={'small'} weight={'semibold'}>Õppekava</Text>
                     <CurriculumSelector course={courseData} onCurriculumUpdated={refreshCourse} />
+                </div>
+                <div className={styles.selector}>
+                    <Text size={'small'} weight={'semibold'}>Moodul</Text>
+                    <ModuleSelector course={courseData} onModuleUpdated={refreshCourse} />
                 </div>
             </div>
         </div>
