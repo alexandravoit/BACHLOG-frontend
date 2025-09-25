@@ -80,6 +80,7 @@ export const CourseProvider = ({ children }) => {
         closePane,
         courses,
         refreshCourse,
+        loadAllCourses
     };
 
     return (

@@ -2,10 +2,12 @@ import { useRef, useState } from 'react';
 import { IconButton } from '@primer/react';
 import { UploadIcon } from '@primer/octicons-react';
 import { parseCsv } from "../../../../api/CoursesApi";
+import { useCourse } from '../../../../context';
 
 function FileUploader() {
     const [isUploading, setIsUploading] = useState(false);
     const fileInputRef = useRef(null);
+    const { loadAllCourses } = useCourse();
 
     const handleButtonClick = () => {
         if (isUploading) return;
@@ -21,6 +23,7 @@ function FileUploader() {
         try {
             const results = await parseCsv(file);
             console.log('Upload successful:', results);
+            await loadAllCourses();
         } catch (error) {
             console.error('Upload failed:', error);
             alert('Faili üleslaadimine ebaõnnestus: ' + (error?.message));
