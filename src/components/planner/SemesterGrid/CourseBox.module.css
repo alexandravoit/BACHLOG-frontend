@@ -17,31 +17,31 @@
     color: var(--fgColor-muted);
 }
 .pm {
-    border-color: #3b82f6;
-    color: #3b82f6;
+    border-color: var(--borderColor-accent-muted);
+    color: var(--fgColor-accent);
 }
 .vm {
-    border-color: #10b981;
-    color: #10b981;
+    border-color: var(--borderColor-attention-muted);
+    color: var(--fgColor-attention);
 }
 .sm {
-    border-color: #f59e0b;
-    color: #f59e0b;
+    border-color: var(--borderColor-open-muted);
+    color: var(--fgColor-open);
 }
 .em {
-    border-color: #8b5cf6;
-    color: #8b5cf6;
+    border-color: var(--borderColor-done-muted);
+    color: var(--fgColor-done);
 }
 .va {
-    border-color: #ec4899;
-    color: #ec4899;
+    border-color: var(--borderColor-sponsors-muted);
+    color: var(--fgColor-sponsors);
 }
 .lm {
-    border-color: #ef4444;
-    color: #ef4444;
+    border-color: var(--borderColor-severe-muted);
+    color: var(--fgColor-severe);
 }
 
 .issues {
-    border-color: var(--fgColor-danger);
+    border-color: var(--borderColor-danger-muted);
     color: var(--fgColor-danger);
 }
