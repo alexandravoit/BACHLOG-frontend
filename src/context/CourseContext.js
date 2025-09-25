@@ -1,5 +1,5 @@
-import React, {createContext, useCallback, useContext, useState} from 'react';
-import {checkCourses, getCourseById} from "../api/CoursesApi";
+import React, {createContext, useCallback, useContext, useState, useEffect} from 'react';
+import {checkCourses, getCourseById, getAllCourses} from "../api/CoursesApi";
 
 const CourseContext = createContext();
 
@@ -16,6 +16,16 @@ export const CourseProvider = ({ children }) => {
     const [selectedCourse, setSelectedCourse] = useState(null);
     const [isPaneOpen, setIsPaneOpen] = useState(false);
     const [courses, setCourses] = useState({});
+
+    const loadAllCourses = async () => {
+        try {
+            const all = await getAllCourses();
+            const mapped = Object.fromEntries(all.map(c => [c.id, c]));
+            setCourses(mapped);
+        } catch (err) {
+            console.error("Failed to load courses:", err);
+        }
+    };
 
     const refreshCourse = async (courseId) => {
         try {
@@ -55,6 +65,10 @@ export const CourseProvider = ({ children }) => {
         setIsPaneOpen(false);
         setSelectedCourse(null);
     };
+
+    useEffect(() => {
+        loadAllCourses();
+    }, []);
 
     const value = {
         validationResults,
