@@ -1,10 +1,10 @@
 import React from 'react';
 import styles from './CourseDetails.module.css';
-import globalStyles from '../../../../global.module.css';
+import globalStyles from '../../../../../global.module.css';
 import {Label, Text} from '@primer/react';
 import {AlertIcon, InfoIcon} from '@primer/octicons-react'
-import { getCourseLabels } from "../../../../utils/CourseUtils";
-import { useCourse } from '../../../../context';
+import { getCourseLabels } from "../../../../../utils/CourseUtils";
+import { useCourse } from '../../../../../context';
 import CurriculumSelector from './utils/CurriculumSelector';
 import ModuleSelector from "./utils/ModuleSelector";
 

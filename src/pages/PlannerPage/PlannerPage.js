@@ -2,7 +2,7 @@ import { CourseProvider, useCourse } from '../../context';
 import SemesterGrid from '../../components/planner/SemesterGrid/SemesterGrid.js';
 import SearchBox from '../../components/planner/SearchBox/SearchBox.js';
 import SlidingPane from '../../components/layout/SlidingPane/SlidingPane.js';
-import CourseDetails from '../../components/layout/SlidingPane/Content/CourseDetails.js';
+import CourseDetails from '../../components/layout/SlidingPane/Content/CourseDetails/CourseDetails.js';
 import styles from './PlannerPage.module.css'
 
 function PlannerContent() {

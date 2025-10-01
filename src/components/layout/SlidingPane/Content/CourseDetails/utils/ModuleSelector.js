@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FormControl, Select } from "@primer/react";
-import { getModuleOptions } from "../../../../../api/ModulesApi";
-import { updateCourseModule } from "../../../../../api/CoursesApi";
+import { getModuleOptions } from "../../../../../../api/ModulesApi";
+import { updateCourseModule } from "../../../../../../api/CoursesApi";
 
 export default function ModuleSelector({ course, onModuleUpdated }) {
     const [modules, setModules] = useState([{ code: course.module, title: course.module }]);

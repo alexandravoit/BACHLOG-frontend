@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { FormControl, Select } from '@primer/react';
-import { getCourseCurricula, updateCourseCurriculum } from '../../../../../api/CoursesApi';
+import { getCourseCurricula, updateCourseCurriculum } from '../../../../../../api/CoursesApi';
 
 export default function CurriculumSelector({ course, onCurriculumUpdated }) {
     const [curricula, setCurricula] = useState([course.curriculum]);

@@ -12,7 +12,7 @@ function LandingPage() {
           </Blankslate.Visual>
           <Blankslate.Heading>BACHLOG -v 2.0.0</Blankslate.Heading>
           <Blankslate.Description>Su baka backlog.</Blankslate.Description>
-          <Blankslate.PrimaryAction as="a" href="/planning">
+          <Blankslate.PrimaryAction as="a" href="/planner">
             Mine planeerima
           </Blankslate.PrimaryAction>
         </Blankslate>
