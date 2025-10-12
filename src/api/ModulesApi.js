@@ -11,3 +11,29 @@ export const getModuleOptions = async () => {
         throw new Error("Failed to fetch module options");
     }
 };
+
+export async function getModuleVersions(curriculumId) {
+    try {
+        const response = await axios.get(
+            `${API_BASE}/versions/${curriculumId}`
+        );
+        return response.data;
+    } catch (err) {
+        console.error("Error checking modules:", err);
+        throw err;
+    }
+}
+
+export async function checkModules(curriculumId, year) {
+    try {
+        const response = await axios.get(
+            `${API_BASE}/check/${curriculumId}/${year}`
+        );
+        console.log("Modules check response:", response.data);
+        return response.data;
+    } catch (err) {
+        console.error("Error checking modules:", err);
+        throw err;
+    }
+}
+

@@ -19,7 +19,7 @@ function CourseBox({ course, onDragStart, draggable }) {
         className={`${styles.courseBox} ${styles[moduleClass]} ${!issues.ok ? styles.issues : ''}`}
         draggable={draggable}
         onDragStart={draggable ? handleDragStart : undefined}
-        onClick={() => openPane(course)} //
+        onClick={() => openPane(course)}
     >
       <Text>{course.code}</Text>
     </div>

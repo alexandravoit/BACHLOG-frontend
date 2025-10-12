@@ -1,0 +1,12 @@
+.modulePage {
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+
+    .moduleHeader {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 16px;
+    }
+}
