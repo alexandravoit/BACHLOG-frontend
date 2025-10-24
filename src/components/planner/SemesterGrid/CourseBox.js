@@ -20,6 +20,7 @@ function CourseBox({ course, onDragStart, draggable }) {
         draggable={draggable}
         onDragStart={draggable ? handleDragStart : undefined}
         onClick={() => openPane(course)}
+        title={course.title}
     >
       <Text>{course.code}</Text>
     </div>

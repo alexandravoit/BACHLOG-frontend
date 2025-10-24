@@ -58,4 +58,13 @@
         }
     }
 
+    .courseCodeLink {
+        cursor: pointer;
+        color: var(--fgColor-accent);
+    }
+
+    .courseCodeLink:hover {
+        text-decoration: underline;
+    }
+
 }

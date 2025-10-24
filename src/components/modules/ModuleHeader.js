@@ -20,6 +20,7 @@ function ModuleHeader() {
                     size="small"
                     value={selectedYear}
                     onChange={handleYearChange}
+                    title={'Õppekava versioon'}
                 >
                     {years.map(year => (
                         <Select.Option key={year} value={year}>

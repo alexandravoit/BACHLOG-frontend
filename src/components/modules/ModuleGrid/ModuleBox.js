@@ -36,9 +36,27 @@ function ModuleBox({ module, courses = [], issues = []  }) {
 
     const renderLabels = () => (
         <div className={styles.labels}>
-            {module.code && <Label variant={'secondary'}>{module.code}</Label>}
-            {module.minEap && <Label variant={'secondary'}>{module.minEap} EAP</Label>}
-            <Label variant={'secondary'}>{totalEap} EAP</Label>
+            {module.code &&
+                <Label
+                    variant={'secondary'}
+                    title={'Mooduli kood'}
+                >
+                    {module.code}
+                </Label>}
+            {module.minEap &&
+                <Label
+                    variant={'secondary'}
+                    title={'Miinimum EAP hulk'}
+                >
+                    {module.minEap} EAP
+                </Label>}
+
+            <Label
+                variant={'secondary'}
+                title={'Planeeritud EAP hulk'}
+            >
+                {totalEap} EAP
+            </Label>
         </div>
     );
 

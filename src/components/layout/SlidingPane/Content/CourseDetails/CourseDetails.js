@@ -14,6 +14,11 @@ function CourseDetails({ course }) {
     const courseData = courses[course.id] || course;
     const issues =  getCourseIssues(course.id);
 
+    const handleCourseCodeClick = () => {
+        const url = `https://ois2.ut.ee/#/courses/${course.code}`;
+        window.open(url, '_blank');
+    };
+
     const renderPrereqs = (prereqs) => {
         if (!prereqs) return null;
         return (
@@ -54,7 +59,12 @@ function CourseDetails({ course }) {
 
             <div className={styles.header}>
                 <Text size={'large'} weight={'semibold'}>{course.title}</Text>
-                <Text>{course.code}</Text>
+                <Text
+                    onClick={handleCourseCodeClick}
+                    className={styles.courseCodeLink}
+                >
+                    {course.code}
+                </Text>
             </div>
 
             <div className={styles.labels}>
