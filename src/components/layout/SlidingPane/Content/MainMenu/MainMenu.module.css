@@ -1,5 +1,18 @@
 .mainMenu {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    flex: 1;
+}
+
+.mainMenuActions {
+    display: flex;
+    flex-direction: column;
     gap: 8px;
+}
+
+.mainMenuFooter {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }

@@ -136,6 +136,16 @@ export const deleteCourse = async (id) => {
   }
 };
 
+export const deleteAllCourses = async () => {
+    try {
+        const response = await axios.delete(`${API_BASE}/`);
+        return response.data;
+    } catch (error) {
+        console.error('Failed to delete all courses:', error);
+        throw new Error('Failed to delete all courses');
+    }
+};
+
 // CSV PARSER
 export const parseCsv = async (file) => {
     try {

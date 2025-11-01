@@ -1,5 +1,4 @@
 import React from "react";
-import { CourseProvider } from "../../context";
 import { ModuleProvider } from "../../context/ModuleContext";
 import ModuleHeader from "../../components/modules/ModuleHeader";
 import ModuleGrid from "../../components/modules/ModuleGrid/ModuleGrid";
@@ -28,10 +27,8 @@ function ModulesPageContent() {
 
 export default function ModulePage() {
     return (
-        <CourseProvider>
-            <ModuleProvider>
-                <ModulesPageContent />
-            </ModuleProvider>
-        </CourseProvider>
+        <ModuleProvider>
+            <ModulesPageContent />
+        </ModuleProvider>
     );
 }

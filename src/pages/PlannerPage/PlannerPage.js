@@ -1,4 +1,4 @@
-import { CourseProvider, useCourse } from '../../context';
+import { useCourse } from '../../context';
 import SemesterGrid from '../../components/planner/SemesterGrid/SemesterGrid.js';
 import SearchBox from '../../components/planner/SearchBox/SearchBox.js';
 import SlidingPane from '../../components/layout/SlidingPane/SlidingPane.js';
@@ -28,9 +28,7 @@ function PlannerContent() {
 
 function PlannerPage() {
     return (
-        <CourseProvider>
-            <PlannerContent />
-        </CourseProvider>
+        <PlannerContent />
     );
 }
 

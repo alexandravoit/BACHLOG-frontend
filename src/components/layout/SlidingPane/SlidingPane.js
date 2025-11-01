@@ -14,7 +14,9 @@ function SlidingPane({ isOpen, onClose, children }) {
                     <BachlogLogo className={styles.logo} />
                     <IconButton icon={XIcon} size="small" variant="invisible" onClick={onClose}>✕</IconButton>
                 </div>
-                <div>{children}</div>
+                <div className={styles.content}>
+                    {children}
+                </div>
             </div>
         </div>
     );
