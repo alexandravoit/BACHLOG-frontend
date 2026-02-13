@@ -1,5 +1,5 @@
 import { Text } from '@primer/react';
-import {useCourse} from '../../../context';
+import {useCourse} from '../../../../context';
 import styles from './CourseBox.module.css'
 
 function CourseBox({ course, onDragStart, draggable }) {

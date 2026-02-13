@@ -1,8 +1,8 @@
 import React from "react";
-import styles from '../../pages/ModulePage/ModulePage.module.css';
+import styles from '../ModulePage.module.css';
 import {FormControl, Select} from "@primer/react";
 import ModulesChecker from "./utils/ModulesChecker";
-import {useModules} from "../../context/ModuleContext";
+import {useModules} from "../../../context/ModuleContext";
 
 function ModuleHeader() {
     const { years, selectedYear, setSelectedYear } = useModules();

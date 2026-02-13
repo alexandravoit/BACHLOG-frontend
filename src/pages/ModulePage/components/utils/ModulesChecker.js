@@ -1,6 +1,6 @@
 import {IconButton} from "@primer/react";
 import {CheckIcon} from "@primer/octicons-react";
-import {useModules} from "../../../context/ModuleContext";
+import {useModules} from "../../../../context/ModuleContext";
 
 function ModulesChecker() {
 

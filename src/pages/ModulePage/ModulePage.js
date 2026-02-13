@@ -1,7 +1,7 @@
 import React from "react";
 import { ModuleProvider } from "../../context/ModuleContext";
-import ModuleHeader from "../../components/modules/ModuleHeader";
-import ModuleGrid from "../../components/modules/ModuleGrid/ModuleGrid";
+import ModuleHeader from "./components/ModuleHeader";
+import ModuleGrid from "./components/ModuleGrid/ModuleGrid";
 import SlidingPane from "../../components/layout/SlidingPane/SlidingPane";
 import CourseDetails from "../../components/layout/SlidingPane/Content/CourseDetails/CourseDetails";
 import { useCourse } from "../../context";

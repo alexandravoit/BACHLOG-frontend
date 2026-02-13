@@ -1,5 +1,5 @@
 import styles from './ModuleGrid.module.css'
-import CourseGrid from '../../planner/SemesterGrid/CourseGrid'
+import CourseGrid from '../../../PlannerPage/components/SemesterGrid/CourseGrid'
 import {Label, Text} from "@primer/react";
 import React from "react";
 import {AlertIcon} from "@primer/octicons-react";

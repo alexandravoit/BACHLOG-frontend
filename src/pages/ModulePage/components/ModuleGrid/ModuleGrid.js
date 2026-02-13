@@ -1,7 +1,7 @@
 import styles from './ModuleGrid.module.css'
 import ModuleBox from "./ModuleBox";
 import OverviewBox from "./OverviewBox";
-import {useModules} from "../../../context/ModuleContext";
+import {useModules} from "../../../../context/ModuleContext";
 
 function ModuleGrid() {
 

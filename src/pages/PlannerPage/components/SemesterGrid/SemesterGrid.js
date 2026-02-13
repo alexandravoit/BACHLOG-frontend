@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import SemesterBox from './SemesterBox.js';
 import styles from './SemesterGrid.module.css'; 
-import { groupCoursesBySemester } from '../../../utils/CourseUtils.js';
+import { groupCoursesBySemester } from '../../../../utils/CourseUtils.js';
 import {
     createCourse,
     updateCourseSemester,
@@ -9,8 +9,8 @@ import {
     updateCourseSeason,
     getCourseCurricula,
     updateCourseCurriculum
-} from '../../../api/CoursesApi.js';
-import { useCourse } from '../../../context';
+} from '../../../../api/CoursesApi.js';
+import { useCourse } from '../../../../context';
 
 
 function SemesterGrid() {

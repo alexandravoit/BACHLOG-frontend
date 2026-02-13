@@ -1,8 +1,8 @@
 import styles from './ModuleGrid.module.css'
-import {useCourse} from "../../../context";
+import {useCourse} from "../../../../context";
 import React from "react";
 import {Text} from "@primer/react";
-import {useModules} from "../../../context/ModuleContext";
+import {useModules} from "../../../../context/ModuleContext";
 import {AlertIcon} from "@primer/octicons-react";
 
 function OverviewBox() {

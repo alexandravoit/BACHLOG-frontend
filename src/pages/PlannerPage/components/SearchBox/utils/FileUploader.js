@@ -1,8 +1,8 @@
 import { useRef, useState } from 'react';
 import { IconButton } from '@primer/react';
 import { UploadIcon } from '@primer/octicons-react';
-import { parseCsv } from "../../../../api/CoursesApi";
-import { useCourse } from '../../../../context';
+import { parseCsv } from "../../../../../api/CoursesApi";
+import { useCourse } from '../../../../../context';
 
 function FileUploader() {
     const [isUploading, setIsUploading] = useState(false);
