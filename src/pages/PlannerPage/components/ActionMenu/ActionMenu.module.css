@@ -1,0 +1,18 @@
+.actionMenu {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--borderColor-muted);
+    border-radius: 8px;
+    padding: 19px 16px 19px 16px;
+}
+
+.actionMenuItems {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+}
+
+.actionMenuHeader {
+    color: var(--fgColor-default);
+    font-weight: var(--base-text-weight-semibold);
+}

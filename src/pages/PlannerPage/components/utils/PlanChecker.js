@@ -1,6 +1,6 @@
 import { IconButton } from '@primer/react';
 import { CheckIcon } from '@primer/octicons-react';
-import { useCourse } from '../../../../../context';
+import { useCourse } from '../../../../context';
 
 
 function PlanChecker() {

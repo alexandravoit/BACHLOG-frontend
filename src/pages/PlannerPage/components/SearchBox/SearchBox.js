@@ -3,8 +3,6 @@ import { Stack, FormControl, TextInput } from '@primer/react';
 import { SearchIcon } from '@primer/octicons-react'
 import SearchResultBox from './SearchResultBox.js';
 import { searchCourses } from '../../../../api/CoursesApi.js';
-import FileUploader from './utils/FileUploader.js'
-import PlanChecker from './utils/PlanChecker.js'
 import styles from './SearchBox.module.css'
 
 function SearchBox() {
@@ -47,10 +45,6 @@ function SearchBox() {
         <FormControl>
           <FormControl.Label className={styles.formControlLabel}>
             <div>Kursuse otsing</div>
-            <div className={styles.actions}>
-              <FileUploader/>
-              <PlanChecker/>
-            </div>
           </FormControl.Label>
           <TextInput
             block
