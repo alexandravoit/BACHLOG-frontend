@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import SemesterBox from './SemesterBox.js';
-import styles from './SemesterGrid.module.css'; 
+import styles from './SemesterGrid.module.css';
 import { groupCoursesBySemester } from '../../../../utils/CourseUtils.js';
 import {
     createCourse,
@@ -21,15 +21,34 @@ function SemesterGrid() {
         validateCourses();
     }, [validateCourses]);
 
+    // AUTO-SCROLL ON DRAG, implemented using Claude
+    useEffect(() => {
+        const handleDragOver = (e) => {
+            e.preventDefault();
+
+            const edge = 150;
+            const speed = 10;
+
+            if (e.clientY < edge) {
+                window.scrollBy(0, -speed);
+            } else if (window.innerHeight - e.clientY < edge) {
+                window.scrollBy(0, speed);
+            }
+        };
+
+        document.addEventListener('dragover', handleDragOver);
+        return () => document.removeEventListener('dragover', handleDragOver);
+    }, []);
+
     const semesters = groupCoursesBySemester(Object.values(courses));
 
     const handleCourseDrag = (event, course, sourceSemesterId) => {
         event.dataTransfer.setData(
-          "application/json",
-          JSON.stringify({
-            course: course,
-            sourceSemesterId,
-          })
+            "application/json",
+            JSON.stringify({
+                course: course,
+                sourceSemesterId,
+            })
         );
         event.dataTransfer.effectAllowed = "move";
     };
@@ -59,9 +78,9 @@ function SemesterGrid() {
 
     const updateNewCourseSeason = async (courseId, courseCode) => {
         try {
-          const seasonInfo = await getCourseSeason(courseCode);
-          await updateCourseSeason(courseId, seasonInfo);
-          await refreshCourse(courseId);
+            const seasonInfo = await getCourseSeason(courseCode);
+            await updateCourseSeason(courseId, seasonInfo);
+            await refreshCourse(courseId);
         } catch (error) {
             console.error("Background season update failed:", error);
         }
@@ -80,14 +99,14 @@ function SemesterGrid() {
 
     return (
         <div className={styles.semesterGrid}>
-          {semesters.map((semester) => (
-            <SemesterBox
-              key={semester.id}
-              semester={semester}
-              onCourseDrop={(courseData) => addCourseToSemester(semester.id, courseData.course, courseData.sourceSemesterId)}
-              onCourseDrag={(event, course) => handleCourseDrag(event, course, semester.id)}
-            />
-          ))}
+            {semesters.map((semester) => (
+                <SemesterBox
+                    key={semester.id}
+                    semester={semester}
+                    onCourseDrop={(courseData) => addCourseToSemester(semester.id, courseData.course, courseData.sourceSemesterId)}
+                    onCourseDrag={(event, course) => handleCourseDrag(event, course, semester.id)}
+                />
+            ))}
         </div>
     );
 }
