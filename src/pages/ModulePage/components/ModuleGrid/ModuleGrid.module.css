@@ -8,6 +8,7 @@
 .moduleBox {
     display: flex;
     flex-direction: row;
+    align-items: flex-start;
     gap: 8px;
     padding: 16px;
     background-color: var(--bgColor-default);
