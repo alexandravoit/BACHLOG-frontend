@@ -1,3 +1,13 @@
+:root {
+    --course-box-size: 72px;
+    --gap-size: 8px;
+    --semester-padding-vertical: 32px;
+    --semester-padding-horizontal: 16px;
+    --semester-grid-gap: 16px;
+    --font-size-course: 8px;
+    --font-size-header: 14px;
+}
+
 .app {
     min-height: 100vh;
     background-color: var(--bgColor-default);
@@ -8,4 +18,43 @@
     background-color: var(--borderColor-muted);
     border-radius: 8px;
     width: 100%;
+}
+
+
+/* Larger screens */
+
+@media (min-width: 1200px) {
+    :root {
+        --course-box-size: 96px;
+        --gap-size: 11px;
+        --semester-padding-vertical: 43px;
+        --semester-padding-horizontal: 21px;
+        --semester-grid-gap: 21px;
+        --font-size-course: 11px;
+        --font-size-header: 19px;
+    }
+}
+
+@media (min-width: 1600px) {
+    :root {
+        --course-box-size: 112px;
+        --gap-size: 13px;
+        --semester-padding-vertical: 50px;
+        --semester-padding-horizontal: 25px;
+        --semester-grid-gap: 25px;
+        --font-size-course: 13px;
+        --font-size-header: 22px;
+    }
+}
+
+@media (min-width: 2000px) {
+    :root {
+        --course-box-size: 128px;
+        --gap-size: 15px;
+        --semester-padding-vertical: 57px;
+        --semester-padding-horizontal: 28px;
+        --semester-grid-gap: 28px;
+        --font-size-course: 15px;
+        --font-size-header: 25px;
+    }
 }

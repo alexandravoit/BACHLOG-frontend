@@ -1,6 +1,6 @@
 .courseGrid {
-    min-height: calc(3 * 72px + 4 * 8px + 2px);
-    min-width: calc(3 * 72px + 4 * 8px + 2px);
+    min-height: calc(3 * var(--course-box-size) + 4 * var(--gap-size) + 2px);
+    min-width: calc(3 * var(--course-box-size) + 4 * var(--gap-size) + 2px);
 
     display: grid;
     grid-template-rows: repeat(3, 1fr);
@@ -8,51 +8,48 @@
     background-color: var(--bgColor-default);
     border: var(--borderColor-muted) 1px solid;
     border-radius: 8px;
-    gap: 8px;
-    padding: 8px;
-
+    gap: var(--gap-size);
+    padding: var(--gap-size);
 }
 
 .semesterBox {
-
     display: flex;
     width: fit-content;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 32px 16px 32px 16px;
+    padding: var(--semester-padding-vertical) var(--semester-padding-horizontal);
     background-color: var(--bgColor-default);
     border-radius: 8px;
     border: var(--borderColor-muted) 1px solid;
-    gap: 8px;
+    gap: var(--gap-size);
+}
 
-    .header {
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-        color: var(--fgColor-default);
-        font-weight: var(--base-text-weight-semibold);
-    }
-
+.semesterBox .header {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--fgColor-default);
+    font-weight: var(--base-text-weight-semibold);
+    font-size: var(--font-size-header);
 }
 
 .semesterGrid {
-  display: grid;
-  width: fit-content;
-  gap: 16px;
-  grid-template-columns: repeat(3, 1fr);
+    display: grid;
+    gap: var(--semester-grid-gap);
+    grid-template-columns: repeat(3, 1fr);
 }
 
-@media (max-width: 1205px) {
-  .semesterGrid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+@media (max-width: 920px) {
+    .semesterGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
-@media (max-width: 910px) {
-  .semesterGrid {
-    grid-template-columns: repeat(1, 1fr);
-  }
+@media (max-width: 620px) {
+    .semesterGrid {
+        grid-template-columns: repeat(1, 1fr);
+    }
 }
