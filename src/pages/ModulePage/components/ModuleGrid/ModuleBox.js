@@ -4,7 +4,7 @@ import {Label, Text} from "@primer/react";
 import React from "react";
 import {AlertIcon} from "@primer/octicons-react";
 
-function ModuleBox({ module, courses = [], issues = []  }) {
+function ModuleBox({ module, courses = [], issues = [], onCourseDrag, onCourseDrop  }) {
 
     const totalEap = courses.reduce((sum, course) => sum + (course.credits || 0), 0);
 
@@ -13,6 +13,23 @@ function ModuleBox({ module, courses = [], issues = []  }) {
         acc[curriculum] = (acc[curriculum] || 0) + (course.credits || 0);
         return acc;
     }, {});
+
+    const handleDrop = (event) => {
+        event.preventDefault();
+        try {
+            const data = JSON.parse(event.dataTransfer.getData("application/json"));
+            if (onCourseDrop) {
+                onCourseDrop(data);
+            }
+        } catch (error) {
+            console.error('Failed to parse drop data:', error);
+        }
+    };
+
+    const handleDragOver = (event) => {
+        event.preventDefault();
+        event.dataTransfer.dropEffect = "move";
+    };
 
     const renderIssues = () => {
         if (issues.length === 0) return null;
@@ -73,9 +90,16 @@ function ModuleBox({ module, courses = [], issues = []  }) {
 
 
     return (
-        <div className={styles.moduleBox}>
+        <div
+            className={styles.moduleBox}
+            onDrop={handleDrop}
+            onDragOver={handleDragOver}
+        >
             <div className={styles.courses}>
-                <CourseGrid courses={courses} />
+                <CourseGrid
+                    courses={courses}
+                    onCourseDrag={ onCourseDrag }
+                />
             </div>
             <div className={styles.content}>
                 <h3>{module.title}</h3>

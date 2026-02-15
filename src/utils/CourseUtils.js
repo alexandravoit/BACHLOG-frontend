@@ -1,4 +1,5 @@
 import { getEmptySemesters } from '../constants/Semesters.js';
+import { useEffect } from 'react';
 
 export const groupCoursesBySemester = (courses) => {
 
@@ -55,4 +56,22 @@ export const getCourseLabels = (course) => {
         });
     }
     return labels;
+};
+
+// AUTO-SCROLL ON DRAG, implemented using Claude
+export const useDragAutoScroll = (edge = 150, speed = 10) => {
+    useEffect(() => {
+        const handleDragOver = (e) => {
+            e.preventDefault();
+
+            if (e.clientY < edge) {
+                window.scrollBy(0, -speed);
+            } else if (window.innerHeight - e.clientY < edge) {
+                window.scrollBy(0, speed);
+            }
+        };
+
+        document.addEventListener('dragover', handleDragOver);
+        return () => document.removeEventListener('dragover', handleDragOver);
+    }, [edge, speed]);
 };

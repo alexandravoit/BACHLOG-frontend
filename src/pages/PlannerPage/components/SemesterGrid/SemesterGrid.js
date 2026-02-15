@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import SemesterBox from './SemesterBox.js';
 import styles from './SemesterGrid.module.css';
-import { groupCoursesBySemester } from '../../../../utils/CourseUtils.js';
+import { groupCoursesBySemester, useDragAutoScroll } from '../../../../utils/CourseUtils.js';
 import {
     createCourse,
     updateCourseSemester,
@@ -21,24 +21,7 @@ function SemesterGrid() {
         validateCourses();
     }, [validateCourses]);
 
-    // AUTO-SCROLL ON DRAG, implemented using Claude
-    useEffect(() => {
-        const handleDragOver = (e) => {
-            e.preventDefault();
-
-            const edge = 150;
-            const speed = 10;
-
-            if (e.clientY < edge) {
-                window.scrollBy(0, -speed);
-            } else if (window.innerHeight - e.clientY < edge) {
-                window.scrollBy(0, speed);
-            }
-        };
-
-        document.addEventListener('dragover', handleDragOver);
-        return () => document.removeEventListener('dragover', handleDragOver);
-    }, []);
+    useDragAutoScroll();
 
     const semesters = groupCoursesBySemester(Object.values(courses));
 
