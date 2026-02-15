@@ -42,6 +42,6 @@
 }
 
 .issues {
-    border-color: var(--borderColor-danger-muted);
+    border: 1px dashed var(--borderColor-danger-emphasis);
     color: var(--fgColor-danger);
 }
