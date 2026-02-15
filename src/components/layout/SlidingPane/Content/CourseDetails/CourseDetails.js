@@ -7,12 +7,13 @@ import { getCourseLabels } from "../../../../../utils/CourseUtils";
 import { useCourse } from '../../../../../context';
 import CurriculumSelector from './utils/CurriculumSelector';
 import ModuleSelector from "./utils/ModuleSelector";
+import DeleteCourse from "./utils/DeleteCourse";
 
 function CourseDetails({ course }) {
-    const labels = getCourseLabels(course);
     const { courses, getCourseIssues, refreshCourse } = useCourse();
     const courseData = courses[course.id] || course;
-    const issues =  getCourseIssues(course.id);
+    const labels = getCourseLabels(courseData);
+    const issues =  getCourseIssues(courseData.id);
 
     const handleCourseCodeClick = () => {
         const url = `https://ois2.ut.ee/#/courses/${course.code}`;
@@ -63,7 +64,7 @@ function CourseDetails({ course }) {
                     onClick={handleCourseCodeClick}
                     className={styles.courseCodeLink}
                 >
-                    {course.code}
+                    {courseData.code}
                 </Text>
             </div>
 
@@ -89,6 +90,11 @@ function CourseDetails({ course }) {
                     <ModuleSelector course={courseData} onModuleUpdated={refreshCourse} />
                 </div>
             </div>
+
+            <div className={styles.courseDetailsFooter}>
+                <DeleteCourse course={courseData} />
+            </div>
+
         </div>
     );
 }

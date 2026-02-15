@@ -22,7 +22,7 @@ function PlannerContent() {
         <div className={styles.plannerPage}>
             <div className={styles.actions}>
                 <div className={styles.searchBox}> <SearchBox /> </div>
-                <div className={styles.actionMenu}> <ActionMenu /> </div>
+                <div> <ActionMenu /> </div>
             </div>
             <div className={styles.semesterGrid}> <SemesterGrid /> </div>
             {renderPane()}

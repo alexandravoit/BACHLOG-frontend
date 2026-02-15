@@ -1,6 +1,8 @@
 import styles from './ActionMenu.module.css'
 import PlanChecker from "../utils/PlanChecker";
 import FileUploader from "../utils/FileUploader";
+import DeleteAll from "../utils/DeleteAll";
+import FileDownloader from "../utils/FileDownloader";
 
 function ActionMenu() {
     return (
@@ -10,8 +12,8 @@ function ActionMenu() {
             <div className={styles.actionMenuItems}>
                 <PlanChecker />
                 <FileUploader />
-                <PlanChecker />
-                <FileUploader />
+                <DeleteAll />
+                <FileDownloader />
             </div>
 
         </div>

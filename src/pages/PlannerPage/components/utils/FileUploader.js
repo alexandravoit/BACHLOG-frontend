@@ -48,8 +48,8 @@ function FileUploader() {
                 icon={UploadIcon}
                 size="small"
                 variant="invisible"
-                aria-label="Lae .csv failina"
-                tooltipDirection="n"
+                aria-label="Lae üles .csv failina"
+                tooltipDirection="s"
                 disabled={isUploading}
                 onClick={handleButtonClick}
             />

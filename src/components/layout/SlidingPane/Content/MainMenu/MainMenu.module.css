@@ -10,9 +10,3 @@
     flex-direction: column;
     gap: 8px;
 }
-
-.mainMenuFooter {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
