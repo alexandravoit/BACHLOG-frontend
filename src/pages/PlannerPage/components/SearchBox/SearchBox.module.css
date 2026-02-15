@@ -6,17 +6,18 @@
 }
 
 .searchResultBox {
-    width: auto;
+    width: 100%;
     background-color: var(--bgColor-default);
     border-radius: 8px;
+    border: 1px solid var(--borderColor-muted);
     overflow-x: auto;
     padding: 8px;
+}
 
-    .coursesResult {
-        display: flex;
-        min-width: max-content;
-        gap: 8px;
-    }
+.coursesResult {
+    display: flex;
+    min-width: max-content;
+    gap: 8px;
 }
 
 .formControlLabel {
