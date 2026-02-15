@@ -1,54 +1,45 @@
 import React from 'react';
 import styles from './CourseDetails.module.css';
 import globalStyles from '../../../../../global.module.css';
-import {Label, Text} from '@primer/react';
-import {AlertIcon, InfoIcon} from '@primer/octicons-react'
+import { Label, Text } from '@primer/react';
 import { getCourseLabels } from "../../../../../utils/CourseUtils";
 import { useCourse } from '../../../../../context';
 import CurriculumSelector from './utils/CurriculumSelector';
 import ModuleSelector from "./utils/ModuleSelector";
 import DeleteCourse from "./utils/DeleteCourse";
+import IssueAlert from "../../../../issue/IssueAlert";
 
 function CourseDetails({ course }) {
     const { courses, getCourseIssues, refreshCourse } = useCourse();
     const courseData = courses[course.id] || course;
     const labels = getCourseLabels(courseData);
-    const issues =  getCourseIssues(courseData.id);
+    const issues = getCourseIssues(courseData.id);
 
     const handleCourseCodeClick = () => {
         const url = `https://ois2.ut.ee/#/courses/${course.code}`;
         window.open(url, '_blank');
     };
 
-    const renderPrereqs = (prereqs) => {
-        if (!prereqs) return null;
-        return (
-            <div className={styles.prereq}>
-                <div className={styles.issueTitle}>
-                    <InfoIcon size={12}/>
-                    <Text size={'small'}>Eeldusained</Text>
-                </div>
-                <Text size={'small'}>
-                    Planeeri vähemalt üks järgmistest ainetest: {prereqs.join(', ')}
-                </Text>
-            </div>
-        );
-    };
-
     const renderIssues = () => {
         if (issues.ok) return null;
+
         return (
             <div className={styles.issues}>
                 {issues.issues.map((issue, index) => (
                     <React.Fragment key={index}>
-                            <div className={styles.issue}>
-                                <div className={styles.issueTitle}>
-                                    <AlertIcon size={12}/>
-                                    <Text size={'small'}>{issue.type}</Text>
-                                </div>
-                                <Text size={'small'}>{issue.message}</Text>
-                            </div>
-                        {renderPrereqs(issue.prereqs)}
+                        <IssueAlert
+                            type="danger"
+                            heading={issue.type}
+                            message={issue.message}
+                        />
+                        {issue.prereqs && (
+                            <IssueAlert
+                                type="warning"
+                                heading="Eeldusained"
+                                message="Planeeri vähemalt üks järgmistest ainetest:"
+                                courseCodes={issue.prereqs}
+                            />
+                        )}
                     </React.Fragment>
                 ))}
             </div>
@@ -57,7 +48,6 @@ function CourseDetails({ course }) {
 
     return (
         <div className={styles.courseDetails}>
-
             <div className={styles.header}>
                 <Text size={'large'} weight={'semibold'}>{course.title}</Text>
                 <Text
@@ -94,7 +84,6 @@ function CourseDetails({ course }) {
             <div className={styles.courseDetailsFooter}>
                 <DeleteCourse course={courseData} />
             </div>
-
         </div>
     );
 }

@@ -16,36 +16,10 @@
         gap: 4px;
     }
 
-    .issueTitle {
-        display: flex;
-        flex-direction: row;
-        font-weight: var(--base-text-weight-semibold);
-        align-items: center;
-        gap: 4px;
-    }
-
     .issues {
         display: flex;
         flex-direction: column;
         gap: 8px;
-
-        .issue {
-            display: flex;
-            flex-direction: column;
-            color: var(--fgColor-danger);
-            background-color: var(--bgColor-danger-muted);
-            border-radius: 8px;
-            padding: 8px;
-        }
-
-        .prereq {
-            display: flex;
-            flex-direction: column;
-            color: var(--fgColor-attention);
-            background-color: var(--bgColor-attention-muted);
-            border-radius: 8px;
-            padding: 8px;
-        }
     }
 
     .selectors {

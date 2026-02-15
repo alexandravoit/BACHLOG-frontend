@@ -3,7 +3,7 @@ import {useCourse} from "../../../../context";
 import React from "react";
 import {Text} from "@primer/react";
 import {useModules} from "../../../../context/ModuleContext";
-import {AlertIcon} from "@primer/octicons-react";
+import IssueAlert from "../../../../components/issue/IssueAlert";
 
 function OverviewBox() {
     const { courses } = useCourse();
@@ -21,17 +21,11 @@ function OverviewBox() {
 
         return (
             <div className={styles.issues}>
-                <div className={styles.issue}>
-                    <div className={styles.issueTitle}>
-                        <AlertIcon size={12}/>
-                        <Text size={'small'} weight="semibold">
-                            Probleem {uniqueProblematicCodes.length} mooduliga:
-                        </Text>
-                        <Text size={'small'}>
-                            {uniqueProblematicCodes.join(', ')}
-                        </Text>
-                    </div>
-                </div>
+                <IssueAlert
+                    type="danger"
+                    heading={`Probleem ${uniqueProblematicCodes.length} mooduliga:`}
+                    message={uniqueProblematicCodes.join(', ')}
+                />
             </div>
         );
     };

@@ -2,7 +2,7 @@ import styles from './ModuleGrid.module.css'
 import CourseGrid from '../../../PlannerPage/components/SemesterGrid/CourseGrid'
 import {Label, Text} from "@primer/react";
 import React from "react";
-import {AlertIcon} from "@primer/octicons-react";
+import IssueAlert from "../../../../components/issue/IssueAlert";
 
 function ModuleBox({ module, courses = [], issues = [], onCourseDrag, onCourseDrop  }) {
 
@@ -36,17 +36,11 @@ function ModuleBox({ module, courses = [], issues = [], onCourseDrag, onCourseDr
 
         return (
             <div className={styles.issues}>
-                <div className={styles.issue}>
-                    <div className={styles.issueTitle}>
-                        <AlertIcon size={12}/>
-                        <Text size={'small'} weight="semibold">
-                            Aineid puudu: {issues.length}
-                        </Text>
-                    </div>
-                    <Text size={'small'}>
-                        {issues.map(course => course.code).join(', ')}
-                    </Text>
-                </div>
+                <IssueAlert
+                    type="danger"
+                    heading={`Aineid puudu: ${issues.length}`}
+                    courseCodes={issues.map(course => course.code)}
+                />
             </div>
         );
     };
@@ -102,13 +96,15 @@ function ModuleBox({ module, courses = [], issues = [], onCourseDrag, onCourseDr
                 />
             </div>
             <div className={styles.content}>
-                <h3>{module.title}</h3>
 
-                {renderLabels()}
+                <div>
+                    <h3>{module.title}</h3>
+                    {renderLabels()}
+                </div>
 
                 {renderCurricula()}
-
                 {renderIssues()}
+
             </div>
         </div>
     );

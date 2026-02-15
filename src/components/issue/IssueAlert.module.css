@@ -1,0 +1,44 @@
+.alert {
+    display: flex;
+    flex-direction: column;
+    border-radius: 8px;
+    padding: 8px;
+    gap: 4px;
+}
+
+.alertTitle {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 4px;
+}
+
+.alert.danger {
+    color: var(--fgColor-danger);
+    background-color: var(--bgColor-danger-muted);
+}
+
+.alert.warning {
+    color: var(--fgColor-attention);
+    background-color: var(--bgColor-attention-muted);
+}
+
+.alert.info {
+    color: var(--fgColor-accent);
+    background-color: var(--bgColor-accent-muted);
+}
+
+.courseCodes {
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 12px;
+}
+
+.courseCode {
+    cursor: pointer;
+    margin-right: 4px;
+}
+
+.courseCode:hover {
+    text-decoration: underline;
+}
