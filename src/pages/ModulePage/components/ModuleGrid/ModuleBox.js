@@ -54,13 +54,6 @@ function ModuleBox({ module, courses = [], issues = [], onCourseDrag, onCourseDr
                 >
                     {module.code}
                 </Label>}
-            {module.minEap &&
-                <Label
-                    variant={'secondary'}
-                    title={'Miinimum EAP hulk'}
-                >
-                    {module.minEap} EAP
-                </Label>}
 
             <Label
                 variant={'secondary'}
