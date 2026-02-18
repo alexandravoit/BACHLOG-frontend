@@ -14,10 +14,16 @@ function ModuleGrid() {
     useDragAutoScroll();
 
     const getIssuesForModule = (module) => {
-        const moduleResults = Object.values(validationResults)
-            .filter(result => result.code === module.code);
+        const moduleResult = validationResults[module.code];
+        if (!moduleResult) return [];
 
-        return moduleResults.flatMap(result => result.missing || []);
+        return moduleResult.submodules
+             .filter(submodule => submodule.missing.length > 0)
+             .map(submodule => ({
+                 submoduleTitle: submodule.title,
+                 missing: submodule.missing
+             }));
+
     };
 
     const handleCourseDrag = (event, course, sourceModuleCode) => {

@@ -17,6 +17,7 @@ export const ModuleProvider = ({ children }) => {
     const { courses } = useCourse();
 
     const [modules, setModules] = useState([]);
+    const [moduleOptions, setModuleOptions] = useState([]);
     const [validationResults, setValidationResults] = useState({});
     const [years, setYears] = useState([]);
     const [selectedYear, setSelectedYear] = useState('');
@@ -42,6 +43,8 @@ export const ModuleProvider = ({ children }) => {
     const loadAllModules = useCallback(async () => {
         try {
             const options = await getModuleOptions();
+            setModuleOptions(options);
+
             const grouped = groupCoursesByModule(Object.values(courses), options);
             setModules(grouped);
         } catch (err) {
@@ -53,20 +56,37 @@ export const ModuleProvider = ({ children }) => {
         try {
             const results = await checkModules(curriculumId, year);
 
-            const resultsByKey = Object.fromEntries(
-                results.modules.map(result => [result.title, result])
-            );
+            const allSubmodules = [
+                ...results.modules.required_submodules,
+                results.modules.thesis_submodule
+            ];
 
-            setValidationResults(resultsByKey);
+            // Group by module code (PM, VM, LM) while preserving submodule details
+            const resultsByCode = allSubmodules.reduce((acc, result) => {
+                const code = result.code;
+                if (!acc[code]) {
+                    acc[code] = {
+                        code: code,
+                        submodules: [],
+                        totalMissing: 0,
+                        ok: true
+                    };
+                }
+
+                acc[code].submodules.push(result);
+                acc[code].totalMissing += result.missing.length;
+                if (!result.ok) {
+                    acc[code].ok = false;
+                }
+
+                return acc;
+            }, {});
+
+            setValidationResults(resultsByCode);
         } catch (error) {
             console.error("Module validation failed:", error);
         }
     }, [selectedYear]);
-
-    const getModuleIssues = (moduleCode, moduleTitle) => {
-        const key = `${moduleCode}-${moduleTitle}`;
-        return validationResults[key] || { ok: true, missing: [] };
-    };
 
     const handleYearChange = (newYear) => {
         setSelectedYear(newYear);
@@ -82,12 +102,12 @@ export const ModuleProvider = ({ children }) => {
 
     const value = {
         modules,
+        moduleOptions,
         years,
         selectedYear,
         validationResults,
         loadAllModules,
         validateModules,
-        getModuleIssues,
         setSelectedYear: handleYearChange
     };
 

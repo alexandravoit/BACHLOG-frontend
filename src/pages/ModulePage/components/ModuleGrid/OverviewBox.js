@@ -7,24 +7,27 @@ import IssueAlert from "../../../../components/issue/IssueAlert";
 
 function OverviewBox() {
     const { courses } = useCourse();
-    const { validationResults } = useModules();
+    const { validationResults, moduleOptions } = useModules();
 
     const totalEap = Object.values(courses).reduce((sum, course) => {
         return sum + (course.credits || 0);
     }, 0);
 
     const problematicModules = Object.values(validationResults).filter(module => !module.ok);
-    const uniqueProblematicCodes = [...new Set(problematicModules.map(module => module.code))];
+    const problematicModuleTitles = problematicModules.map(validationModule => {
+        const option = moduleOptions.find(opt => opt.code === validationModule.code);
+        return option?.title || validationModule.code;
+    });
 
     const renderModuleProblems = () => {
-        if (uniqueProblematicCodes.length === 0) return null;
+        if (problematicModuleTitles.length === 0) return null;
 
         return (
             <div className={styles.issues}>
                 <IssueAlert
                     type="danger"
-                    heading={`Probleem ${uniqueProblematicCodes.length} mooduliga:`}
-                    message={uniqueProblematicCodes.join(', ')}
+                    heading={`Probleem ${problematicModuleTitles.length} mooduliga:`}
+                    message={problematicModuleTitles.join(', ')}
                 />
             </div>
         );

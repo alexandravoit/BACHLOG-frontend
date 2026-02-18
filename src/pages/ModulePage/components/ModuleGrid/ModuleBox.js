@@ -36,14 +36,18 @@ function ModuleBox({ module, courses = [], issues = [], onCourseDrag, onCourseDr
 
         return (
             <div className={styles.issues}>
-                <IssueAlert
-                    type="danger"
-                    heading={`Aineid puudu: ${issues.length}`}
-                    courseCodes={issues.map(course => course.code)}
-                />
+                {issues.map((submoduleGroup, index) => (
+                    <IssueAlert
+                        key={index}
+                        type="danger"
+                        heading={`${submoduleGroup.submoduleTitle}: ${submoduleGroup.missing.length} puudu`}
+                        courseCodes={submoduleGroup.missing.map(course => course.code)}
+                    />
+                ))}
             </div>
         );
     };
+
 
     const renderLabels = () => (
         <div className={styles.labels}>
