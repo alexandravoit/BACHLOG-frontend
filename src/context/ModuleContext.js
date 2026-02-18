@@ -61,7 +61,6 @@ export const ModuleProvider = ({ children }) => {
                 results.modules.thesis_submodule
             ];
 
-            // Group by module code (PM, VM, LM) while preserving submodule details
             const resultsByCode = allSubmodules.reduce((acc, result) => {
                 const code = result.code;
                 if (!acc[code]) {
