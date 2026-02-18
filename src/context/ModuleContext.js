@@ -19,6 +19,7 @@ export const ModuleProvider = ({ children }) => {
     const [modules, setModules] = useState([]);
     const [moduleOptions, setModuleOptions] = useState([]);
     const [validationResults, setValidationResults] = useState({});
+    const [warnings, setWarnings] = useState({ misplaced: [], doubled: [] });
     const [years, setYears] = useState([]);
     const [selectedYear, setSelectedYear] = useState('');
 
@@ -82,6 +83,7 @@ export const ModuleProvider = ({ children }) => {
             }, {});
 
             setValidationResults(resultsByCode);
+            setWarnings(results.warnings || { misplaced: [], doubled: [] });
         } catch (error) {
             console.error("Module validation failed:", error);
         }
@@ -105,6 +107,7 @@ export const ModuleProvider = ({ children }) => {
         years,
         selectedYear,
         validationResults,
+        warnings,
         loadAllModules,
         validateModules,
         setSelectedYear: handleYearChange

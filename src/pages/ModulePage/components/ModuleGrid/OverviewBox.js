@@ -7,7 +7,7 @@ import IssueAlert from "../../../../components/issue/IssueAlert";
 
 function OverviewBox() {
     const { courses } = useCourse();
-    const { validationResults, moduleOptions } = useModules();
+    const { validationResults, moduleOptions, warnings } = useModules();
 
     const totalEap = Object.values(courses).reduce((sum, course) => {
         return sum + (course.credits || 0);
@@ -23,15 +23,52 @@ function OverviewBox() {
         if (problematicModuleTitles.length === 0) return null;
 
         return (
-            <div className={styles.issues}>
                 <IssueAlert
                     type="danger"
-                    heading={`Probleem ${problematicModuleTitles.length} mooduliga:`}
+                    heading={`Kursused puudu ${problematicModuleTitles.length} moodulist:`}
                     message={problematicModuleTitles.join(', ')}
                 />
-            </div>
         );
     };
+
+    const renderWarnings = () => {
+        const warningAlerts = [];
+
+        // Multiples
+        if (warnings.doubled && warnings.doubled.length > 0) {
+            const count = warnings.doubled.length;
+            warningAlerts.push(
+                <IssueAlert
+                    key="doubled"
+                    type="info"
+                    heading={`${count} ${count === 1 ? 'kursus' : 'kursust'} planeeritud mitu korda:`}
+                    courseCodes={warnings.doubled.map(c => c.code)}
+                />
+            );
+        }
+
+        // Misplaced
+        if (warnings.misplaced && warnings.misplaced.length > 0) {
+            warnings.misplaced.forEach((misplaced, index) => {
+                warningAlerts.push(
+                    <IssueAlert
+                        key={`misplaced-${index}`}
+                        type="warning"
+                        heading={`${misplaced.code} vales moodulis:`}
+                        message={misplaced.reason}
+                    />
+                );
+            });
+        }
+
+
+        return warningAlerts.length > 0 ? (
+            <div className={styles.warnings}>
+                {warningAlerts}
+            </div>
+        ) : null;
+    };
+
 
     return (
         <div className={styles.moduleBox}>
@@ -45,7 +82,10 @@ function OverviewBox() {
                     </div>
                 </div>
 
-                {renderModuleProblems()}
+                <div className={styles.issues}>
+                    {renderModuleProblems()}
+                    {renderWarnings()}
+                </div>
 
             </div>
         </div>

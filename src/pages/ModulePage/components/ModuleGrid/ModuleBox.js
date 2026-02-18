@@ -40,7 +40,7 @@ function ModuleBox({ module, courses = [], issues = [], onCourseDrag, onCourseDr
                     <IssueAlert
                         key={index}
                         type="danger"
-                        heading={`${submoduleGroup.submoduleTitle}: ${submoduleGroup.missing.length} puudu`}
+                        heading={`${submoduleGroup.submoduleTitle} (${submoduleGroup.missing.length} puudu):`}
                         courseCodes={submoduleGroup.missing.map(course => course.code)}
                     />
                 ))}

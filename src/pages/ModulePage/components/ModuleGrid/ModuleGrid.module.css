@@ -51,6 +51,12 @@
     gap: 8px;
 }
 
+.warnings {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+}
+
 @media (max-width: 910px) {
     .moduleGrid {
         grid-template-columns: 1fr;
