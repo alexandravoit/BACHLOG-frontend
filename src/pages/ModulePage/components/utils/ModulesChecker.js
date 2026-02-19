@@ -4,11 +4,11 @@ import {useModules} from "../../../../context/ModuleContext";
 
 function ModulesChecker() {
 
-    const { validateModules, selectedYear } = useModules();
+    const { validateModules, selectedYear, selectedCurriculum } = useModules();
 
     const handleCheck = async () => {
         try {
-            await validateModules(2476, selectedYear);
+            await validateModules(selectedCurriculum, selectedYear);
         } catch (error) {
             console.error("Module validation failed:", error);
         }

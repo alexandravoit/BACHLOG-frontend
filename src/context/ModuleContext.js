@@ -22,12 +22,12 @@ export const ModuleProvider = ({ children }) => {
     const [warnings, setWarnings] = useState({ misplaced: [], doubled: [] });
     const [years, setYears] = useState([]);
     const [selectedYear, setSelectedYear] = useState('');
+    const [selectedCurriculum, setSelectedCurriculum] = useState('2476'); // default is Computer Science
 
     useEffect(() => {
         async function fetchYears() {
             try {
-                const curriculumId = '2476';
-                const response = await getModuleVersions(curriculumId);
+                const response = await getModuleVersions(selectedCurriculum);
                 const yearOptions = response.result || [];
                 setYears(yearOptions);
                 if (yearOptions.length > 0) {
@@ -38,8 +38,11 @@ export const ModuleProvider = ({ children }) => {
                 setYears([]);
             }
         }
-        fetchYears();
-    }, []);
+        if (selectedCurriculum) {
+            fetchYears();
+        }
+    }, [selectedCurriculum]);
+
 
     const loadAllModules = useCallback(async () => {
         try {
@@ -60,7 +63,7 @@ export const ModuleProvider = ({ children }) => {
             const allSubmodules = [
                 ...results.modules.required_submodules,
                 results.modules.thesis_submodule
-            ];
+            ].filter(Boolean);
 
             const resultsByCode = allSubmodules.reduce((acc, result) => {
                 const code = result.code;
@@ -81,7 +84,7 @@ export const ModuleProvider = ({ children }) => {
 
                 return acc;
             }, {});
-
+            console.log(resultsByCode);
             setValidationResults(resultsByCode);
             setWarnings(results.warnings || { misplaced: [], doubled: [] });
         } catch (error) {
@@ -93,24 +96,34 @@ export const ModuleProvider = ({ children }) => {
         setSelectedYear(newYear);
     };
 
+    const handleCurriculumChange = (newCurriculum) => {
+        setSelectedCurriculum(newCurriculum);
+        setSelectedYear('');
+        setYears([]);
+    };
+
     useEffect(() => {
         loadAllModules();
+    }, [loadAllModules]);
 
-        if (selectedYear) {
-            validateModules(2476, selectedYear);
+    useEffect(() => {
+        if (selectedYear && selectedCurriculum) {
+            validateModules(selectedCurriculum, selectedYear);
         }
-    }, [loadAllModules, selectedYear, validateModules]);
+    }, [selectedYear, selectedCurriculum, validateModules]);
 
     const value = {
         modules,
         moduleOptions,
         years,
         selectedYear,
+        selectedCurriculum,
         validationResults,
         warnings,
         loadAllModules,
         validateModules,
-        setSelectedYear: handleYearChange
+        setSelectedYear: handleYearChange,
+        setSelectedCurriculum: handleCurriculumChange
     };
 
     return (
