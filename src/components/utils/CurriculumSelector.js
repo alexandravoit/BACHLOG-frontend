@@ -29,7 +29,7 @@ export default function CurriculumSelector({
             }
         };
         fetchCurricula();
-    }, [course?.uuid, course?.curriculum, mode]);
+    }, [course, mode]);
 
     useEffect(() => {
         if (value !== undefined) {
