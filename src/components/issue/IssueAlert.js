@@ -1,10 +1,10 @@
 import React from 'react';
 import { Text } from '@primer/react';
-import { AlertIcon, InfoIcon } from '@primer/octicons-react';
+import { AlertIcon, InfoIcon, CheckCircleIcon, XCircleIcon } from '@primer/octicons-react';
 import styles from './IssueAlert.module.css';
 
 function IssueAlert({
-                        type = 'danger', // variants are 'danger', 'warning', 'info'
+                        type = 'danger', // variants are 'danger', 'warning', 'info', 'success'
                         heading,
                         message,
                         courseCodes = []
@@ -12,10 +12,13 @@ function IssueAlert({
 
     const getIcon = () => {
         switch(type) {
+            case 'success':
+                return <CheckCircleIcon size={12} />;
             case 'info':
-            case 'warning':
                 return <InfoIcon size={12} />;
             case 'danger':
+                return <XCircleIcon size={12} />;
+            case 'warning':
             default:
                 return <AlertIcon size={12} />;
         }
@@ -51,7 +54,7 @@ function IssueAlert({
                 {getIcon()}
                 <Text size={'small'} weight={'semibold'}>{heading}</Text>
             </div>
-            {message && <Text size={'small'}>{message}</Text>}
+            {message && <Text size={'small'} className={styles.alertText}>{message}</Text>}
             {renderCourseCodes()}
         </div>
     );

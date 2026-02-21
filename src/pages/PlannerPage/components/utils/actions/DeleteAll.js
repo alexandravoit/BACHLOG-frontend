@@ -1,7 +1,7 @@
 import { IconButton } from '@primer/react';
 import { TrashIcon } from '@primer/octicons-react';
-import { useCourse } from '../../../../context';
-import {deleteAllCourses} from "../../../../api/CoursesApi";
+import { useCourse } from '../../../../../context';
+import {deleteAllCourses} from "../../../../../api/CoursesApi";
 
 
 function DeleteAll() {

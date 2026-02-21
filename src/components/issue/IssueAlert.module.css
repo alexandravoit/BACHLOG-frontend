@@ -11,6 +11,11 @@
     flex-direction: row;
     align-items: center;
     gap: 4px;
+    white-space: pre-line;
+}
+
+.alertText {
+    white-space: pre-line;
 }
 
 .alert.danger {
@@ -26,6 +31,11 @@
 .alert.info {
     color: var(--fgColor-accent);
     background-color: var(--bgColor-accent-muted);
+}
+
+.alert.success {
+    color: var(--fgColor-success);
+    background-color: var(--bgColor-success-muted);
 }
 
 .courseCodes {

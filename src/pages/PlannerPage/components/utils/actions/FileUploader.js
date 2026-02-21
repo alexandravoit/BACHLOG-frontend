@@ -1,11 +1,14 @@
 import { useRef, useState } from 'react';
 import { IconButton } from '@primer/react';
 import { UploadIcon } from '@primer/octicons-react';
-import { parseCsv } from "../../../../api/CoursesApi";
-import { useCourse } from '../../../../context';
+import { parseCsv } from "../../../../../api/CoursesApi";
+import { useCourse } from '../../../../../context';
+import UploadDialog from "../UploadDialog";
 
 function FileUploader() {
     const [isUploading, setIsUploading] = useState(false);
+    const [showResults, setShowResults] = useState(false);
+    const [uploadResults, setUploadResults] = useState(null);
     const fileInputRef = useRef(null);
     const { loadAllCourses } = useCourse();
 
@@ -22,15 +25,27 @@ function FileUploader() {
 
         try {
             const results = await parseCsv(file);
-            console.log('Upload successful:', results);
+            setUploadResults(results);
+            console.log(results);
+            setShowResults(true);
             await loadAllCourses();
         } catch (error) {
-            console.error('Upload failed:', error);
-            alert('Faili üleslaadimine ebaõnnestus: ' + (error?.message));
+            setUploadResults({
+                processed: 0,
+                succeeded: 0,
+                failed: 0,
+                error: error?.message || 'Tundmatu viga'
+            });
+            setShowResults(true);
         } finally {
             setIsUploading(false);
             event.target.value = '';
         }
+    };
+
+    const handleCloseDialog = () => {
+        setShowResults(false);
+        setUploadResults(null);
     };
 
     return (
@@ -52,6 +67,11 @@ function FileUploader() {
                 tooltipDirection="s"
                 disabled={isUploading}
                 onClick={handleButtonClick}
+            />
+            <UploadDialog
+                open={showResults}
+                results={uploadResults}
+                onClose={handleCloseDialog}
             />
         </div>
     );

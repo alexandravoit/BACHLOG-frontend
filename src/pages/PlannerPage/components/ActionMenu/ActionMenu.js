@@ -1,8 +1,8 @@
 import styles from './ActionMenu.module.css'
-import PlanChecker from "../utils/PlanChecker";
-import FileUploader from "../utils/FileUploader";
-import DeleteAll from "../utils/DeleteAll";
-import FileDownloader from "../utils/FileDownloader";
+import PlanChecker from "../utils/actions/PlanChecker";
+import FileUploader from "../utils/actions/FileUploader";
+import DeleteAll from "../utils/actions/DeleteAll";
+import FileDownloader from "../utils/actions/FileDownloader";
 
 function ActionMenu() {
     return (
