@@ -26,9 +26,20 @@
     width: 100%;
 }
 
+/* Smaller screens */
+@media (max-width: 768px) {
+    :root {
+        --course-box-size: 60px;
+        --gap-size: 6px;
+        --semester-padding-vertical: 24px;
+        --semester-padding-horizontal: 12px;
+        --semester-grid-gap: 12px;
+        --font-size-course: 7px;
+        --font-size-header: 12px;
+    }
+}
 
 /* Larger screens */
-
 @media (min-width: 1200px) {
     :root {
         --course-box-size: 96px;

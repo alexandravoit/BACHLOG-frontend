@@ -52,3 +52,16 @@
 .courseCode:hover {
     text-decoration: underline;
 }
+
+@media (max-width: 768px) {
+    .alertTitle,
+    .courseCodes,
+    .alertText {
+        font-size: 8px !important;
+    }
+
+    .alertTitle svg {
+        width: 8px !important;
+        height: 8px !important;
+    }
+}

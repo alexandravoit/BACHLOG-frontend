@@ -62,7 +62,16 @@ export default function CurriculumSelector({
             <FormControl.Label visuallyHidden>{label}</FormControl.Label>
             <Select
                 size='small'
-                sx={{ width: '100%' }}
+                sx={
+                    mode === 'course'
+                        ? { width: '100%' }
+                        : {
+                            width: 150,
+                            overflow: 'hidden',
+                            textOverflow: 'ellipsis',
+                            whiteSpace: 'nowrap'
+                        }
+                }
                 value={selected}
                 onChange={handleChange}
                 title={label}

@@ -52,7 +52,7 @@ function IssueAlert({
         <div className={`${styles.alert} ${styles[type]}`}>
             <div className={styles.alertTitle}>
                 {getIcon()}
-                <Text size={'small'} weight={'semibold'}>{heading}</Text>
+                <Text size={'small'} weight={'semibold'} className={styles.alertTitle}>{heading}</Text>
             </div>
             {message && <Text size={'small'} className={styles.alertText}>{message}</Text>}
             {renderCourseCodes()}
