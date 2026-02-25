@@ -66,7 +66,7 @@ export default function CurriculumSelector({
                     mode === 'course'
                         ? { width: '100%' }
                         : {
-                            width: 150,
+                            width: 65,
                             overflow: 'hidden',
                             textOverflow: 'ellipsis',
                             whiteSpace: 'nowrap'

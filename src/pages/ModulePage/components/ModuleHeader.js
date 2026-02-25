@@ -4,6 +4,7 @@ import {FormControl, Select} from "@primer/react";
 import ModulesChecker from "./utils/ModulesChecker";
 import {useModules} from "../../../context/ModuleContext";
 import CurriculumSelector from "../../../components/utils/CurriculumSelector";
+import TutorialDialog from "../../../components/utils/TutorialDialog";
 
 function ModuleHeader() {
     const { years, selectedYear, setSelectedYear, selectedCurriculum, setSelectedCurriculum } = useModules();
@@ -37,6 +38,10 @@ function ModuleHeader() {
                 </Select>
             </FormControl>
             <ModulesChecker year={selectedYear} />
+            <TutorialDialog
+                title="MOODULID"
+                description="Moodulid"
+            />
         </div>
     );
 }
