@@ -12,6 +12,17 @@
     font-weight: var(--base-text-weight-semibold);
 }
 
+.courseBox:focus {
+    outline: none;
+}
+
+.overlay {
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    gap: 4px;
+}
+
 .none {
     border-color: var(--borderColor-muted);
     color: var(--fgColor-muted);

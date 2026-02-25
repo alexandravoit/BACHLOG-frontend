@@ -27,6 +27,30 @@
     gap: 32px;
 }
 
+.tooltip {
+    animation: textGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes textGlow {
+    from {
+        text-shadow: 0 0 0 var(--fgColor-default);
+    }
+    to {
+        text-shadow:
+                0 0 4px color-mix(in srgb, var(--fgColor-default) 55%, transparent),
+                0 0 8px color-mix(in srgb, var(--fgColor-default) 35%, transparent);
+    }
+}
+
+.tooltip:focus {
+    outline: none;
+}
+
+.tooltipExplanation {
+    display: flex;
+    padding: 16px;
+}
+
 @media (max-width: 768px) {
     .hero {
         flex-direction: column-reverse;

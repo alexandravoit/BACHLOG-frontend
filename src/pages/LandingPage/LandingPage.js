@@ -2,6 +2,7 @@ import {Hero, Card, ThemeProvider as BrandTheme} from '@primer/react-brand';
 import { ReactComponent as BigLogo } from '../../assets/BACHLOG-OUTLINE-LOGO.svg'
 import styles from './LandingPage.module.css'
 import React from "react";
+import BacklogWithTooltip from "./components/BacklogWithTooltip";
 
 function LandingPage() {
 
@@ -12,7 +13,7 @@ function LandingPage() {
                 <div className={styles.hero}>
                     <Hero>
                         <Hero.Heading>BACHLOG:</Hero.Heading>
-                        <Hero.Heading>Sinu baka <em>backlog</em></Hero.Heading>
+                        <Hero.Heading>Sinu baka <BacklogWithTooltip/> </Hero.Heading>
                         <Hero.Description>
                             Bakalaureuse õppeplaani koostamiseks ja valideerimiseks mõeldud rakendus Tartu Ülikooli tudengitele.
                         </Hero.Description>
