@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { ThreeBarsIcon } from '@primer/octicons-react';
 import styles from './AppHeader.module.css'
 import { ReactComponent as BachlogLogo } from '../../../assets/BACHLOG-LOGO.svg';
-import SlidingPane from "../SlidingPane/SlidingPane";
+import DialogPane from "../SlidingPane/DialogPane";
 import MainMenu from "../SlidingPane/Content/MainMenu/MainMenu";
 import { useLocation } from 'react-router-dom';
 
@@ -32,11 +32,9 @@ function AppHeader() {
             <Text weight="semibold">/</Text>
             <Text weight="semibold">{currentTitle}</Text>
 
-            {isMenuOpen && (
-            <SlidingPane isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)}>
-              <MainMenu />
-            </SlidingPane>
-            )}
+            <DialogPane isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)}>
+                <MainMenu />
+            </DialogPane>
         </div>
     );
 }

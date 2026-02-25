@@ -2,7 +2,7 @@ import React from "react";
 import { ModuleProvider } from "../../context/ModuleContext";
 import ModuleHeader from "./components/ModuleHeader";
 import ModuleGrid from "./components/ModuleGrid/ModuleGrid";
-import SlidingPane from "../../components/layout/SlidingPane/SlidingPane";
+import DialogPane from "../../components/layout/SlidingPane/DialogPane";
 import CourseDetails from "../../components/layout/SlidingPane/Content/CourseDetails/CourseDetails";
 import { useCourse } from "../../context";
 import styles from "./ModulePage.module.css";
@@ -16,11 +16,9 @@ function ModulesPageContent() {
             <ModuleHeader />
             <div className={globalStyles.divider} />
             <ModuleGrid />
-            {isPaneOpen && (
-                <SlidingPane isOpen={isPaneOpen} onClose={closePane}>
-                    <CourseDetails course={selectedCourse} />
-                </SlidingPane>
-            )}
+            <DialogPane isOpen={isPaneOpen} onClose={closePane}>
+                {selectedCourse && <CourseDetails course={selectedCourse} />}
+            </DialogPane>
         </div>
     );
 }

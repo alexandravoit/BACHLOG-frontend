@@ -1,18 +1,28 @@
-import {ActionList} from "@primer/react";
-import styles from './MainMenu.module.css'
+import {NavList} from "@primer/react";
 
 function MainMenu() {
-    return (
-        <div className={styles.mainMenu}>
+    const path = window.location.pathname;
 
-            <div className={styles.mainMenuActions}>
-                <ActionList showDividers sx={{ margin: '-16px' }}>
-                    <ActionList.LinkItem href="/">Avaleht</ActionList.LinkItem>
-                    <ActionList.LinkItem href="/semesters">Semestrid</ActionList.LinkItem>
-                    <ActionList.LinkItem href="/modules">Moodulid</ActionList.LinkItem>
-                </ActionList>
-            </div>
-        </div>
+    return (
+        <NavList>
+            <NavList.Item href="/" aria-current={path === "/" ? "page" : undefined}>
+                Avaleht
+            </NavList.Item>
+
+            <NavList.Item
+                href="/semesters"
+                aria-current={path === "/semesters" ? "page" : undefined}
+            >
+                Semestrid
+            </NavList.Item>
+
+            <NavList.Item
+                href="/modules"
+                aria-current={path === "/modules" ? "page" : undefined}
+            >
+                Moodulid
+            </NavList.Item>
+        </NavList>
     );
 }
 

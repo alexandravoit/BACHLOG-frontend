@@ -10,7 +10,7 @@ function FileUploader() {
     const [showResults, setShowResults] = useState(false);
     const [uploadResults, setUploadResults] = useState(null);
     const fileInputRef = useRef(null);
-    const { loadAllCourses } = useCourse();
+    const { loadAllCourses, validateCourses } = useCourse();
 
     const handleButtonClick = () => {
         if (isUploading) return;
@@ -39,6 +39,7 @@ function FileUploader() {
             setShowResults(true);
         } finally {
             setIsUploading(false);
+            validateCourses();
             event.target.value = '';
         }
     };
