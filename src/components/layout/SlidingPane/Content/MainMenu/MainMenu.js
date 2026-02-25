@@ -8,8 +8,8 @@ function MainMenu() {
             <div className={styles.mainMenuActions}>
                 <ActionList showDividers sx={{ margin: '-16px' }}>
                     <ActionList.LinkItem href="/">Avaleht</ActionList.LinkItem>
+                    <ActionList.LinkItem href="/semesters">Semestrid</ActionList.LinkItem>
                     <ActionList.LinkItem href="/modules">Moodulid</ActionList.LinkItem>
-                    <ActionList.LinkItem href="/planner">Planeerija</ActionList.LinkItem>
                 </ActionList>
             </div>
         </div>

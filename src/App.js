@@ -14,7 +14,7 @@ function App() {
           <AppHeader />
           <Routes>
             <Route path="/" element={<LandingPage />} />
-            <Route path="/planner" element={<PlannerPage />} />
+            <Route path="/semesters" element={<PlannerPage />} />
             <Route path="/modules" element={<ModulePage />} />
           </Routes>
           <AppFooter />

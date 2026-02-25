@@ -25,7 +25,7 @@ function LandingPage() {
 
                 <div className={styles.cards}>
                     <div>
-                        <Card ctaText="" href="/planner" hasBorder fullWidth={true} >
+                        <Card ctaText="" href="/semesters" hasBorder fullWidth={true} >
                             <Card.Heading>Kursused</Card.Heading>
                             <Card.Description>
                                 Otsi kursuseid. Saa infot nende kuuluvuse, eeldusainete ning toimumisaja kohta.
@@ -34,7 +34,7 @@ function LandingPage() {
                     </div>
 
                     <div>
-                        <Card ctaText="" href="/planner" hasBorder fullWidth={true} >
+                        <Card ctaText="" href="/semesters" hasBorder fullWidth={true} >
                             <Card.Heading>Semestrid</Card.Heading>
                             <Card.Description>
                                 Planeeri kursuseid semestrite kaupa. Kontrolli plaani korrektsust.

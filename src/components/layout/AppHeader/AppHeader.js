@@ -5,9 +5,19 @@ import styles from './AppHeader.module.css'
 import { ReactComponent as BachlogLogo } from '../../../assets/BACHLOG-LOGO.svg';
 import SlidingPane from "../SlidingPane/SlidingPane";
 import MainMenu from "../SlidingPane/Content/MainMenu/MainMenu";
+import { useLocation } from 'react-router-dom';
 
-function AppHeader( {mainPage = '/', subPage = '' }) {
+function AppHeader() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const location = useLocation();
+
+    const routeTitles = {
+        '/': 'Avaleht',
+        '/semesters': 'Semestrid',
+        '/modules': 'Moodulid',
+    };
+
+    const currentTitle = routeTitles[location.pathname] || '';
 
     return (
         <div className={styles.appHeader}>
@@ -19,8 +29,8 @@ function AppHeader( {mainPage = '/', subPage = '' }) {
             />
             <BachlogLogo className={styles.logo} />
             <Text weight='semibold'>BACHLOG</Text>
-            <Text weight='semibold'>/</Text>
-            <Text weight='semibold'>{subPage}</Text>
+            <Text weight="semibold">/</Text>
+            <Text weight="semibold">{currentTitle}</Text>
 
             {isMenuOpen && (
             <SlidingPane isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)}>
