@@ -35,7 +35,14 @@ function CourseBox({ course, onDragStart, draggable }) {
         >
             <div className={styles.overlay}>
                 <Text fontWeight="bold">{course.title}</Text>
-                <div><Label variant="secondary">{course.credits} EAP</Label></div>
+                <div className={styles.overlayDetails}>
+                    <Label variant="secondary">{course.credits} EAP</Label>
+                    {course.curriculum && (
+                        <Text>
+                            {course.curriculum}
+                        </Text>
+                    )}
+                </div>
             </div>
         </AnchoredOverlay>
     );

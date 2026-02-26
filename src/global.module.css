@@ -6,24 +6,13 @@
     --semester-grid-gap: 16px;
     --font-size-course: 8px;
     --font-size-header: 14px;
+    --font-size-overlay: 14px;
 
     .issues {
         display: flex;
         flex-direction: column;
         gap: 8px;
     }
-}
-
-.app {
-    min-height: 100vh;
-    background-color: var(--bgColor-default);
-}
-
-.divider {
-    height: 2px;
-    background-color: var(--borderColor-muted);
-    border-radius: 8px;
-    width: 100%;
 }
 
 /* Smaller screens */
@@ -36,6 +25,7 @@
         --semester-grid-gap: 12px;
         --font-size-course: 7px;
         --font-size-header: 12px;
+        --font-size-overlay: 12px;
     }
 }
 
@@ -49,6 +39,7 @@
         --semester-grid-gap: 21px;
         --font-size-course: 11px;
         --font-size-header: 19px;
+        --font-size-overlay: 14px;
     }
 }
 
@@ -61,6 +52,7 @@
         --semester-grid-gap: 25px;
         --font-size-course: 13px;
         --font-size-header: 22px;
+        --font-size-overlay: 16px;
     }
 }
 
@@ -73,5 +65,6 @@
         --semester-grid-gap: 28px;
         --font-size-course: 15px;
         --font-size-header: 25px;
+        --font-size-overlay: 18px;
     }
 }
