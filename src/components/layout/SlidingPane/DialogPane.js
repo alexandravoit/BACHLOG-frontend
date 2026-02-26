@@ -15,6 +15,7 @@ function DialogPane({ isOpen, onClose, children }) {
             width="small"
             returnFocusRef={returnFocusRef}
             onClose={onClose}
+            autoFocus={false}
 
             renderHeader={({ onClose }) => (
                 <div className={styles.header}>

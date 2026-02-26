@@ -4,6 +4,7 @@ import FileUploader from "../utils/actions/FileUploader";
 import DeleteAll from "../utils/actions/DeleteAll";
 import FileDownloader from "../utils/actions/FileDownloader";
 import TutorialDialog from "../../../../components/utils/TutorialDialog";
+import PlannerGuide from "../../../../components/guides/PlannerGuide";
 
 function ActionMenu() {
     return (
@@ -15,10 +16,10 @@ function ActionMenu() {
                 <FileUploader />
                 <DeleteAll />
                 <FileDownloader />
-                <TutorialDialog
-                    title="SEMESTRID"
-                    description="Semestrid"
-                />
+
+                <TutorialDialog title='SEMESTRID'>
+                    <PlannerGuide />
+                </TutorialDialog>
             </div>
 
         </div>
