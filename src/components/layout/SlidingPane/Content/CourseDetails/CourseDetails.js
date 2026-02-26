@@ -4,10 +4,10 @@ import globalStyles from '../../../../../global.module.css';
 import { Label, Text } from '@primer/react';
 import { getCourseLabels } from "../../../../../utils/CourseUtils";
 import { useCourse } from '../../../../../context';
-import CurriculumSelector from '../../../../utils/CurriculumSelector';
 import ModuleSelector from "./utils/ModuleSelector";
 import DeleteCourse from "./utils/DeleteCourse";
 import IssueAlert from "../../../../issue/IssueAlert";
+import CourseCurriculumSelector from "./utils/CourseCurriculumSelector";
 
 function CourseDetails({ course }) {
     const { courses, getCourseIssues, refreshCourse } = useCourse();
@@ -73,7 +73,7 @@ function CourseDetails({ course }) {
             <div className={styles.selectors}>
                 <div className={styles.selector}>
                     <Text size={'small'} weight={'semibold'}>Õppekava</Text>
-                    <CurriculumSelector course={courseData} onCurriculumUpdated={refreshCourse} />
+                    <CourseCurriculumSelector course={courseData} onCurriculumUpdated={refreshCourse} />
                 </div>
                 <div className={styles.selector}>
                     <Text size={'small'} weight={'semibold'}>Moodul</Text>

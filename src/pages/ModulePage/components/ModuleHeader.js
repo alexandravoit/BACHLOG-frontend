@@ -3,8 +3,8 @@ import styles from '../ModulePage.module.css';
 import {FormControl, Select, Tooltip} from "@primer/react";
 import ModulesChecker from "./utils/ModulesChecker";
 import {useModules} from "../../../context/ModuleContext";
-import CurriculumSelector from "../../../components/utils/CurriculumSelector";
 import TutorialDialog from "../../../components/utils/TutorialDialog";
+import AllCurriculumSelector from "./utils/AllCurriculumSelector";
 
 function ModuleHeader() {
     const { years, selectedYear, setSelectedYear, selectedCurriculum, setSelectedCurriculum } = useModules();
@@ -17,12 +17,10 @@ function ModuleHeader() {
         <div className={styles.moduleHeader}>
             <h1>Moodulid</h1>
 
-                <CurriculumSelector
-                    mode="all"
-                    value={selectedCurriculum}
-                    onChange={setSelectedCurriculum}
-                    label="Õppekava"
-                />
+            <AllCurriculumSelector
+                value={selectedCurriculum}
+                onChange={setSelectedCurriculum}
+            />
 
             <FormControl>
                 <FormControl.Label visuallyHidden={true}>Aasta</FormControl.Label>
