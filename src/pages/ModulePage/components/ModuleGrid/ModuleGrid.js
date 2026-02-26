@@ -5,10 +5,11 @@ import {useModules} from "../../../../context/ModuleContext";
 import {useCourse} from "../../../../context";
 import {useDragAutoScroll} from "../../../../utils/CourseUtils";
 import {updateCourseModule} from "../../../../api/CoursesApi";
+import {calculateRequiredEap} from "../../../../utils/ModuleUtils";
 
 function ModuleGrid() {
 
-    const { modules, validationResults } = useModules();
+    const { modules, validationResults, rawResults } = useModules();
     const { refreshCourse } = useCourse();
 
     useDragAutoScroll();
@@ -56,6 +57,7 @@ function ModuleGrid() {
                     key={module.code}
                     module={module}
                     courses={module.courses || []}
+                    requiredEap={calculateRequiredEap(module, rawResults)}
                     issues={getIssuesForModule(module)}
                     onCourseDrop={(courseData) => moveCourseToModule(module.code, courseData.course, courseData.sourceModuleCode)}
                     onCourseDrag={(event, course) => handleCourseDrag(event, course, module.code)}

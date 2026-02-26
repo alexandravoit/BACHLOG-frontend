@@ -18,6 +18,7 @@ export const ModuleProvider = ({ children }) => {
 
     const [modules, setModules] = useState([]);
     const [moduleOptions, setModuleOptions] = useState([]);
+    const [rawResults, setRawResults] = useState({});
     const [validationResults, setValidationResults] = useState({});
     const [warnings, setWarnings] = useState({ misplaced: [], doubled: [] });
     const [years, setYears] = useState([]);
@@ -59,6 +60,7 @@ export const ModuleProvider = ({ children }) => {
     const validateModules = useCallback(async (curriculumId, year = selectedYear) => {
         try {
             const results = await checkModules(curriculumId, year);
+            setRawResults(results);
 
             const allSubmodules = [
                 ...results.modules.required_submodules,
@@ -84,7 +86,7 @@ export const ModuleProvider = ({ children }) => {
 
                 return acc;
             }, {});
-            console.log(resultsByCode);
+
             setValidationResults(resultsByCode);
             setWarnings(results.warnings || { misplaced: [], doubled: [] });
         } catch (error) {
@@ -118,6 +120,7 @@ export const ModuleProvider = ({ children }) => {
         years,
         selectedYear,
         selectedCurriculum,
+        rawResults,
         validationResults,
         warnings,
         loadAllModules,

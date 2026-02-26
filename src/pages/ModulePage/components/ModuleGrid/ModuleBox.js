@@ -4,7 +4,7 @@ import {Label, Text} from "@primer/react";
 import React from "react";
 import IssueAlert from "../../../../components/issue/IssueAlert";
 
-function ModuleBox({ module, courses = [], issues = [], onCourseDrag, onCourseDrop  }) {
+function ModuleBox({ module, courses = [], issues = [], requiredEap = 0, onCourseDrag, onCourseDrop  }) {
 
     const totalEap = courses.reduce((sum, course) => sum + (course.credits || 0), 0);
 
@@ -57,10 +57,20 @@ function ModuleBox({ module, courses = [], issues = [], onCourseDrag, onCourseDr
                     title={'Mooduli kood'}
                 >
                     {module.code}
-                </Label>}
+                </Label>
+            }
+
+            {requiredEap !== 0 &&
+                <Label
+                    variant={'secondary'}
+                    title={'Minimaalne EAP hulk'}
+                >
+                    {requiredEap} EAP
+                </Label>
+            }
 
             <Label
-                variant={'secondary'}
+                variant={'primary'}
                 title={'Planeeritud EAP hulk'}
             >
                 {totalEap} EAP
