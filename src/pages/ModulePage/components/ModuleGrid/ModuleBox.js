@@ -1,6 +1,6 @@
 import styles from './ModuleGrid.module.css'
 import CourseGrid from '../../../PlannerPage/components/SemesterGrid/CourseGrid'
-import {Label, Text} from "@primer/react";
+import {Label, Text, Tooltip} from "@primer/react";
 import React from "react";
 import IssueAlert from "../../../../components/issue/IssueAlert";
 
@@ -51,30 +51,57 @@ function ModuleBox({ module, courses = [], issues = [], requiredEap = 0, onCours
 
     const renderLabels = () => (
         <div className={styles.labels}>
-            {module.code &&
-                <Label
-                    variant={'secondary'}
-                    title={'Mooduli kood'}
-                >
-                    {module.code}
-                </Label>
-            }
+            {module.code && (
+                <Tooltip text="Mooduli kood" direction="s">
+                    <button
+                        type="button"
+                        style={{
+                            background: 'none',
+                            border: 'none',
+                            padding: 0,
+                            cursor: 'default'
+                        }}
+                    >
+                        <Label variant={'secondary'}>
+                            {module.code}
+                        </Label>
+                    </button>
+                </Tooltip>
+            )}
 
-            {requiredEap !== 0 &&
-                <Label
-                    variant={'secondary'}
-                    title={'Minimaalne EAP hulk'}
-                >
-                    {requiredEap} EAP
-                </Label>
-            }
+            {requiredEap !== 0 && (
+                <Tooltip text="Minimaalne EAP hulk" direction="s">
+                    <button
+                        type="button"
+                        style={{
+                            background: 'none',
+                            border: 'none',
+                            padding: 0,
+                            cursor: 'default'
+                        }}
+                    >
+                        <Label variant={'secondary'}>
+                            {requiredEap} EAP
+                        </Label>
+                    </button>
+                </Tooltip>
+            )}
 
-            <Label
-                variant={'primary'}
-                title={'Planeeritud EAP hulk'}
-            >
-                {totalEap} EAP
-            </Label>
+            <Tooltip text="Planeeritud EAP hulk" direction="s">
+                <button
+                    type="button"
+                    style={{
+                        background: 'none',
+                        border: 'none',
+                        padding: 0,
+                        cursor: 'default'
+                    }}
+                >
+                    <Label variant={'primary'}>
+                        {totalEap} EAP
+                    </Label>
+                </button>
+            </Tooltip>
         </div>
     );
 

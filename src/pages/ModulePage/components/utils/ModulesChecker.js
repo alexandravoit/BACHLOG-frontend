@@ -21,7 +21,7 @@ function ModulesChecker() {
                 size="small"
                 variant="invisible"
                 aria-label="Kontrolli"
-                tooltipDirection="n"
+                tooltipDirection="s"
                 onClick={handleCheck}
             />
         </div>
