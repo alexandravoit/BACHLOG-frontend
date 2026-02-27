@@ -1,70 +1,14 @@
-# Getting Started with Create React App
+# BACHLOG: Backlog of your Bachelor's degree
+**This is a project carried out within the scope of a Computer Science Bachelor's thesis.**
+BACHLOG is a web application that allows students of Tartu University to plan courses across 3 years of their degree and validate the plan's complience with university guidelines.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+![LOGO-github](https://github.com/user-attachments/assets/4d94d7b4-f512-4a2e-98e6-489749e29340)
+<svg width="801" height="265" viewBox="0 0 801 265" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M128.472 1V62.3471L119.68 71.1382L128.472 79.9294V128.472H1V1H128.472ZM83.9426 96.5562V83.9427H71.1381V96.5562H83.9426ZM83.9426 58.3337V45.7203H71.1381V58.3337H83.9426Z" stroke="#057EDB" stroke-width="2"/>
+<path d="M136.176 1H263.648V128.472H206.315V83.9427H193.51V128.472H136.176V1ZM206.315 58.3337V45.7203H193.51V58.3337H206.315Z" stroke="#057EDB" stroke-width="2"/>
+<path d="M128.472 193.51H83.9426V180.897H71.1381V219.119H83.9426V206.315H128.472V263.649H1V136.177H128.472V193.51Z" stroke="#057EDB" stroke-width="2"/>
+<path d="M263.15 205.928V263.261H135.679V205.928H161.097V193.123H135.679V135.789H263.15V193.123H218.43V205.928H263.15Z" stroke="#057EDB" stroke-width="2"/>
+<path d="M387.44 146.662H531.453V264H270L270 1L387.44 1.00002V146.662Z" stroke="#057EDB" stroke-width="2"/>
+<path d="M394.777 1.00002H531.453L531.453 139.581H394.776L394.777 1.00002ZM469.979 78.1605V64.4433H456.25V78.1605H469.979Z" stroke="#057EDB" stroke-width="2"/>
+<path d="M682.405 92.5571V144.596H708.668V118.381H800V264H538.547V1H800V92.5571H682.405Z" stroke="#057EDB" stroke-width="2"/>
+</svg>
