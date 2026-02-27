@@ -5,6 +5,7 @@ import ModulesChecker from "./utils/ModulesChecker";
 import {useModules} from "../../../context/ModuleContext";
 import TutorialDialog from "../../../components/utils/TutorialDialog";
 import AllCurriculumSelector from "./utils/AllCurriculumSelector";
+import ModulesGuide from "../../../components/guides/ModuleGuide";
 
 function ModuleHeader() {
     const { years, selectedYear, setSelectedYear, selectedCurriculum, setSelectedCurriculum } = useModules();
@@ -42,10 +43,9 @@ function ModuleHeader() {
 
             <ModulesChecker year={selectedYear} />
 
-            <TutorialDialog
-                title="MOODULID"
-                description="Moodulid"
-            />
+            <TutorialDialog title='MOODULID'>
+                <ModulesGuide />
+            </TutorialDialog>
         </div>
     );
 }
