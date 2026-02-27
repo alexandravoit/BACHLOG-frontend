@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { Dialog, IconButton } from '@primer/react';
 import { XIcon } from '@primer/octicons-react';
-import { ReactComponent as BachlogLogo } from '../../../assets/BACHLOG-LOGO.svg';
+import { ReactComponent as BachlogLogo } from '../../../assets/logos/LOGO-minimal.svg';
 import styles from './DialogPane.module.css';
 
 function DialogPane({ isOpen, onClose, children }) {

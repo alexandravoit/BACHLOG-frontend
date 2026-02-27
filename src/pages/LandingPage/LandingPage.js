@@ -1,5 +1,6 @@
-import {Hero, Card, ThemeProvider as BrandTheme} from '@primer/react-brand';
-import { ReactComponent as BigLogo } from '../../assets/BACHLOG-OUTLINE-LOGO.svg'
+import {Hero, Card, ThemeProvider as BrandTheme, BreakoutBanner} from '@primer/react-brand';
+import { ReactComponent as LogoMainSquared } from '../../assets/logos/LOGO-main-squared.svg'
+import { ReactComponent as LogoMain } from '../../assets/logos/LOGO-main.svg'
 import styles from './LandingPage.module.css'
 import React from "react";
 import BacklogWithTooltip from "./components/BacklogWithTooltip";
@@ -11,7 +12,7 @@ function LandingPage() {
             <div className={styles.landingPage}>
 
                 <div className={styles.hero}>
-                    <Hero>
+                    <Hero className={styles.heroText}>
                         <Hero.Heading>BACHLOG:</Hero.Heading>
                         <Hero.Heading>Sinu baka <BacklogWithTooltip/> </Hero.Heading>
                         <Hero.Description>
@@ -19,7 +20,8 @@ function LandingPage() {
                         </Hero.Description>
                     </Hero>
 
-                    <BigLogo className={styles.logo} />
+                    <LogoMainSquared className={`${styles.logo} ${styles.logoDesktop}`} />
+                    <LogoMain className={`${styles.logo} ${styles.logoMobile}`} />
 
                 </div>
 
@@ -52,6 +54,18 @@ function LandingPage() {
                         </Card>
                     </div>
                 </div>
+
+                <BreakoutBanner
+                    className={styles.banner}
+                    backgroundColor="var(--bgColor-default)"
+                    align="center"
+                >
+                    <BreakoutBanner.Heading>Tudengilt tudengile!</BreakoutBanner.Heading>
+                    <BreakoutBanner.Description>
+                        Valminud Informaatika bakalaureusetöö raames.
+                        Küsimuste, kaebuste või muude mõtete korral otsige üles <strong>Alexandra Voit</strong>.
+                    </BreakoutBanner.Description>
+                </BreakoutBanner>
 
             </div>
         </BrandTheme>

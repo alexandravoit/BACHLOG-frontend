@@ -2,7 +2,7 @@ import { IconButton, Text } from '@primer/react';
 import { useState } from 'react';
 import { ThreeBarsIcon } from '@primer/octicons-react';
 import styles from './AppHeader.module.css'
-import { ReactComponent as BachlogLogo } from '../../../assets/BACHLOG-LOGO.svg';
+import { ReactComponent as BachlogLogo } from '../../../assets/logos/LOGO-minimal.svg';
 import DialogPane from "../SlidingPane/DialogPane";
 import MainMenu from "../SlidingPane/Content/MainMenu/MainMenu";
 import { useLocation } from 'react-router-dom';
@@ -23,6 +23,7 @@ function AppHeader() {
         <div className={styles.appHeader}>
             <IconButton
                 icon={ThreeBarsIcon}
+                variant="ghost"
                 size="small"
                 aria-label="Menüü"
                 onClick={() => setIsMenuOpen(true)}
