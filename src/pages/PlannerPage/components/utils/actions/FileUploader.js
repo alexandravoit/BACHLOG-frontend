@@ -10,7 +10,7 @@ function FileUploader() {
     const [showResults, setShowResults] = useState(false);
     const [uploadResults, setUploadResults] = useState(null);
     const fileInputRef = useRef(null);
-    const { loadAllCourses, validateCourses } = useCourse();
+    const { addCourses } = useCourse();
 
     const handleButtonClick = () => {
         if (isUploading) return;
@@ -25,11 +25,16 @@ function FileUploader() {
 
         try {
             const results = await parseCsv(file);
+
+            const successfulCourses = results.courses
+                .filter(course => course.status === 'success')
+                .map(({ status, ...course }) => course);
+
+            addCourses(successfulCourses);
             setUploadResults(results);
-            console.log(results);
             setShowResults(true);
-            await loadAllCourses();
         } catch (error) {
+            console.error('Upload failed:', error);
             setUploadResults({
                 processed: 0,
                 succeeded: 0,
@@ -39,7 +44,6 @@ function FileUploader() {
             setShowResults(true);
         } finally {
             setIsUploading(false);
-            validateCourses();
             event.target.value = '';
         }
     };

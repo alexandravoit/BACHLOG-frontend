@@ -1,42 +1,38 @@
 import axios from 'axios';
+import { StorageService } from '../services/StorageService';
 
 const API_BASE = '/api/courses';
 
-// COURSES API
+// OIS API
+
 export const searchCourses = async (query) => {
-  try {
-    const response = await axios.get(`${API_BASE}/search`, {
-      params: {
-        q: query.toUpperCase()
-      }
-    });
-    return response.data;
-  } catch (error) {
-    console.error('Error searching courses:', error);
-    throw new Error('Failed to fetch courses');
-  }
+    try {
+        const response = await axios.get(`${API_BASE}/search`, {
+            params: { q: query.toUpperCase() }
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Error searching courses:', error);
+        throw new Error('Failed to fetch courses');
+    }
 };
 
 export const getCourseSeason = async (query) => {
-  try {
-    const response = await axios.get(`${API_BASE}/season`, {
-      params: {
-        q: query.toUpperCase()
-      }
-    });
-    return response.data;
-  } catch (error) {
-    console.error('Error getting course season:', error);
-    throw new Error('Failed to get course season');
-  }
+    try {
+        const response = await axios.get(`${API_BASE}/season`, {
+            params: { q: query.toUpperCase() }
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Error getting course season:', error);
+        throw new Error('Failed to get course season');
+    }
 };
 
 export const getCourseCurricula = async (courseUuid) => {
     try {
         const response = await axios.get(`${API_BASE}/curricula`, {
-            params: {
-                q: courseUuid
-            }
+            params: { q: courseUuid }
         });
         return response.data;
     } catch (error) {
@@ -55,117 +51,30 @@ export const getAllCurricula = async () => {
     }
 };
 
-// DATABASE
-export const getAllCourses = async () => {
-  try {
-    const response = await axios.get(API_BASE);
-    return response.data;
-  } catch (error) {
-    console.error('Failed to fetch courses:', error);
-    throw new Error('Failed to load courses');
-  }
-};
+// VALIDATION
 
-export const getCourseById = async (id) => {
-  try {
-    const response = await axios.get(`${API_BASE}/${id}`);
-    return response.data;
-  } catch (error) {
-    console.error('Failed to fetch course:', error);
-    throw new Error('Course not found');
-  }
-};
-
-export const getCoursesBySemester = async (semester) => {
-  try {
-    const response = await axios.get(`${API_BASE}/semester/${semester}`);
-    return response.data;
-  } catch (error) {
-    console.error('Failed to fetch courses by semester:', error);
-    throw new Error('Failed to load semester courses');
-  }
-};
-
-export const createCourse = async (courseData) => {
-  try {
-    const response = await axios.post(API_BASE, courseData);
-    return response.data;
-  } catch (error) {
-    console.error('Failed to create course:', error);
-    throw new Error('Failed to save course');
-  }
-};
-
-export const updateCourseSemester = async (id, semester) => {
-  try {
-    const response = await axios.put(`${API_BASE}/${id}/semester`, { semester });
-    return response.data;
-  } catch (error) {
-    console.error('Failed to update course:', error);
-    throw new Error('Failed to move course');
-  }
-};
-
-export const updateCourseSeason = async (courseId, seasonInfo) => {
-  try {
-    const response = await axios.put(`${API_BASE}/${courseId}/season`, seasonInfo);
-    return response.data;
-  } catch (error) {
-    console.error('Failed to update course season:', error);
-    throw new Error('Failed to update course season');
-  }
-};
-
-export const updateCourseCurriculum = async (courseId, curriculum) => {
+export const checkCourses = async (coursesData) => {
     try {
-        const response = await axios.put(`${API_BASE}/${courseId}/curriculum`, {curriculum});
+        const response = await axios.post(`${API_BASE}/check/all`, {
+            courses: coursesData
+        });
         return response.data;
     } catch (error) {
-        console.error('Failed to update course curriculum:', error);
-        throw new Error('Failed to update course curriculum');
+        console.error('Error checking all courses:', error);
+        throw error.response?.data || { error: 'Failed to check all courses' };
     }
 };
 
-export const updateCourseModule = async (courseId, module) => {
-    try {
-        const response = await axios.put(`${API_BASE}/${courseId}/module`, {module});
-        return response.data;
-    } catch (error) {
-        console.error('Failed to update course module:', error);
-        throw new Error('Failed to update course module');
-    }
-};
 
-export const deleteCourse = async (id) => {
-  try {
-    const response = await axios.delete(`${API_BASE}/${id}`);
-    return response.data;
-  } catch (error) {
-    console.error('Failed to delete course:', error);
-    throw new Error('Failed to delete course');
-  }
-};
+// CSV
 
-export const deleteAllCourses = async () => {
-    try {
-        const response = await axios.delete(`${API_BASE}/`);
-        return response.data;
-    } catch (error) {
-        console.error('Failed to delete all courses:', error);
-        throw new Error('Failed to delete all courses');
-    }
-};
-
-// CSV PARSER
 export const parseCsv = async (file) => {
     try {
         const formData = new FormData();
         formData.append('csv', file);
 
         const response = await axios.post(`${API_BASE}/parser`, formData, {
-            headers: {
-                'Content-Type': 'multipart/form-data',
-            },
+            headers: { 'Content-Type': 'multipart/form-data' }
         });
 
         return response.data;
@@ -175,45 +84,34 @@ export const parseCsv = async (file) => {
     }
 };
 
-// CSV EXPORT, implemented using Claude
+// NOTE: Claude was used to refactor csv logic from backend to frontend (due to DB removal)
+
 export const exportCsv = async () => {
     try {
-        const response = await axios.get(`${API_BASE}/parser/export`, {
-            responseType: 'blob'
-        });
+        const courses = Object.values(StorageService.getCourses());
 
-        const url = window.URL.createObjectURL(new Blob([response.data]));
+        // CREATE
+        const csvRows = [
+            'KOOD,SEMESTER,MOODUL',
+            ...courses.map(course =>
+                `${course.code},${course.semester},${course.module || ''}`
+            )
+        ];
+        const csvContent = csvRows.join('\n');
+
+        // DOWNLOAD
+        const blob = new Blob([csvContent], { type: 'text/csv' });
+        const url = window.URL.createObjectURL(blob);
         const link = document.createElement('a');
         link.href = url;
         link.setAttribute('download', 'BACHLOG.csv');
         document.body.appendChild(link);
         link.click();
         link.remove();
+
+        StorageService.markExported();
     } catch (error) {
         console.error('CSV export failed:', error);
         throw error;
-    }
-};
-
-// CHECKER
-
-export const checkCourse = async (courseId) => {
-    try {
-        const response = await axios.get(`${API_BASE}/${courseId}/check`);
-        return response.data;
-    } catch (error) {
-        console.error('Error checking course:', error);
-        throw error.response?.data || { error: 'Failed to check course' };
-    }
-};
-
-export const checkCourses = async () => {
-    try {
-        const response = await axios.get(`${API_BASE}/check/all`);
-        console.log('Check response:', response.data);
-        return response.data;
-    } catch (error) {
-        console.error('Error checking all courses:', error);
-        throw error.response?.data || { error: 'Failed to check all courses' };
     }
 };

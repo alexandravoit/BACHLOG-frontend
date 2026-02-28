@@ -1,5 +1,6 @@
 import React, {createContext, useCallback, useContext, useState, useEffect} from 'react';
-import {checkCourses, getCourseById, getAllCourses} from "../api/CoursesApi";
+import { checkCourses } from "../api/CoursesApi";
+import { StorageService } from '../services/StorageService';
 
 const CourseContext = createContext();
 
@@ -17,70 +18,87 @@ export const CourseProvider = ({ children }) => {
     const [isPaneOpen, setIsPaneOpen] = useState(false);
     const [courses, setCourses] = useState({});
 
-    const loadAllCourses = async () => {
-        try {
-            const all = await getAllCourses();
-            const mapped = Object.fromEntries(all.map(c => [c.id, c]));
-            setCourses(mapped);
-        } catch (err) {
-            console.error("Failed to load courses:", err);
-        }
-    };
+    useEffect(() => {
+        const savedCourses = StorageService.getCourses();
+        setCourses(savedCourses);
+    }, []);
 
-    const refreshCourse = async (courseId) => {
-        try {
-            const course = await getCourseById(courseId);
-            setCourses(prev => ({ ...prev, [courseId]: course }));
-            return course;
-        } catch (err) {
-            console.error('Failed to refresh course:', err);
-            return null;
-        }
-    };
+    const loadAllCourses = useCallback(() => {
+        const savedCourses = StorageService.getCourses();
+        setCourses(savedCourses);
+    }, []);
+
+    const addCourse = useCallback((courseData) => {
+        const newCourse = StorageService.addCourse(courseData);
+        setCourses(StorageService.getCourses());
+        return newCourse;
+    }, []);
+
+    const addCourses = useCallback((coursesArray) => {
+        StorageService.addCourses(coursesArray);
+        setCourses(StorageService.getCourses());
+    }, []);
+
+    const updateCourse = useCallback((id, updates) => {
+        StorageService.updateCourse(id, updates);
+        setCourses(StorageService.getCourses());
+    }, []);
+
+    const deleteCourse = useCallback((id) => {
+        StorageService.deleteCourse(id);
+        setCourses(StorageService.getCourses());
+    }, []);
+
+    const deleteAllCourses = useCallback(() => {
+        StorageService.clearAll();
+        setCourses({});
+    }, []);
 
     const validateCourses = useCallback(async () => {
         try {
-            const results = await checkCourses();
+            const coursesArray = Object.values(courses);
+            const results = await checkCourses(coursesArray);
+
             const resultsById = Object.fromEntries(
                 results.map(result => [result.id, result])
             );
             setValidationResults(resultsById);
         } catch (error) {
-            console.error('Automatic validation failed:', error);
+            console.error('Validation failed:', error);
         }
-    }, [])
+    }, [courses]);
 
-    const getCourseIssues = (courseId) => {
+    const getCourseIssues = useCallback((courseId) => {
         return validationResults[courseId] || { ok: true };
-    };
+    }, [validationResults]);
 
-    const openPane = (course) => {
+    const openPane = useCallback((course) => {
         if (course && course.id) {
             setSelectedCourse(course);
             setIsPaneOpen(true);
         }
-    };
+    }, []);
 
-    const closePane = () => {
+    const closePane = useCallback(() => {
         setIsPaneOpen(false);
         setSelectedCourse(null);
-    };
-
-    useEffect(() => {
-        loadAllCourses();
     }, []);
 
     const value = {
+        courses,
+        loadAllCourses,
+        addCourse,
+        addCourses,
+        updateCourse,
+        deleteCourse,
+        deleteAllCourses,
         validationResults,
         validateCourses,
         getCourseIssues,
         selectedCourse,
         isPaneOpen,
         openPane,
-        closePane,
-        courses,
-        refreshCourse,
-        loadAllCourses
+        closePane
     };
 
     return (

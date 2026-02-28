@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { FormControl, Select } from '@primer/react';
-import { getCourseCurricula, updateCourseCurriculum } from '../../../../../../api/CoursesApi';
+import { getCourseCurricula } from '../../../../../../api/CoursesApi';
+import {useCourse} from "../../../../../../context";
 
-export default function CourseCurriculumSelector({ course, onCurriculumUpdated }) {
+export default function CourseCurriculumSelector({ course }) {
     const [curricula, setCurricula] = useState([]);
     const [selected, setSelected] = useState(course?.curriculum || '');
+    const { updateCourse } = useCourse();
 
     useEffect(() => {
         const fetchCurricula = async () => {
@@ -28,10 +30,7 @@ export default function CourseCurriculumSelector({ course, onCurriculumUpdated }
         setSelected(newValue);
 
         try {
-            await updateCourseCurriculum(course.id, newValue);
-            if (onCurriculumUpdated) {
-                await onCurriculumUpdated(course.id);
-            }
+            await updateCourse(course.id, { curriculum: newValue });
         } catch (err) {
             console.error('Failed to update curriculum:', err);
         }

@@ -4,13 +4,12 @@ import OverviewBox from "./OverviewBox";
 import {useModules} from "../../../../context/ModuleContext";
 import {useCourse} from "../../../../context";
 import {useDragAutoScroll} from "../../../../utils/CourseUtils";
-import {updateCourseModule} from "../../../../api/CoursesApi";
 import {calculateRequiredEap} from "../../../../utils/ModuleUtils";
 
 function ModuleGrid() {
 
     const { modules, validationResults, rawResults } = useModules();
-    const { refreshCourse } = useCourse();
+    const { updateCourse } = useCourse();
 
     useDragAutoScroll();
 
@@ -42,8 +41,9 @@ function ModuleGrid() {
         if (sourceModuleCode === targetModuleCode) return;
 
         try {
-            await updateCourseModule(course.id, targetModuleCode);
-            await refreshCourse(course.id);
+            await updateCourse(course.id, {
+                module: targetModuleCode
+            });
         } catch (error) {
             console.error('Failed to move course:', error);
         }

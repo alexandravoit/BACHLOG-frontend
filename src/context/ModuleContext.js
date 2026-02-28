@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect, useCallback } from "react";
+import React, {createContext, useContext, useState, useEffect, useCallback, useMemo} from "react";
 import { getModuleOptions, checkModules, getModuleVersions } from "../api/ModulesApi";
 import { groupCoursesByModule } from "../utils/CourseUtils";
 import { useCourse } from "./CourseContext";
@@ -16,8 +16,16 @@ export const useModules = () => {
 export const ModuleProvider = ({ children }) => {
     const { courses } = useCourse();
 
-    const [modules, setModules] = useState([]);
     const [moduleOptions, setModuleOptions] = useState([]);
+
+    useEffect(() => {
+        getModuleOptions().then(setModuleOptions);
+    }, []);
+
+    const modules = useMemo(() => {
+        return groupCoursesByModule(Object.values(courses), moduleOptions);
+    }, [courses, moduleOptions]);
+
     const [rawResults, setRawResults] = useState({});
     const [validationResults, setValidationResults] = useState({});
     const [warnings, setWarnings] = useState({ misplaced: [], doubled: [] });
@@ -44,22 +52,11 @@ export const ModuleProvider = ({ children }) => {
         }
     }, [selectedCurriculum]);
 
-
-    const loadAllModules = useCallback(async () => {
-        try {
-            const options = await getModuleOptions();
-            setModuleOptions(options);
-
-            const grouped = groupCoursesByModule(Object.values(courses), options);
-            setModules(grouped);
-        } catch (err) {
-            console.error("Failed to load modules:", err);
-        }
-    }, [courses]);
-
     const validateModules = useCallback(async (curriculumId, year = selectedYear) => {
         try {
-            const results = await checkModules(curriculumId, year);
+            const coursesArray = Object.values(courses);
+            const results = await checkModules(curriculumId, year, coursesArray);
+
             setRawResults(results);
 
             const allSubmodules = [
@@ -92,7 +89,7 @@ export const ModuleProvider = ({ children }) => {
         } catch (error) {
             console.error("Module validation failed:", error);
         }
-    }, [selectedYear]);
+    }, [selectedYear, courses]);
 
     const handleYearChange = (newYear) => {
         setSelectedYear(newYear);
@@ -103,10 +100,6 @@ export const ModuleProvider = ({ children }) => {
         setSelectedYear('');
         setYears([]);
     };
-
-    useEffect(() => {
-        loadAllModules();
-    }, [loadAllModules]);
 
     useEffect(() => {
         if (selectedYear && selectedCurriculum) {
@@ -123,7 +116,6 @@ export const ModuleProvider = ({ children }) => {
         rawResults,
         validationResults,
         warnings,
-        loadAllModules,
         validateModules,
         setSelectedYear: handleYearChange,
         setSelectedCurriculum: handleCurriculumChange

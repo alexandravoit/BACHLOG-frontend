@@ -24,16 +24,15 @@ export async function getModuleVersions(curriculumId) {
     }
 }
 
-export async function checkModules(curriculumId, year) {
+export async function checkModules(curriculumId, year, coursesData) {
     try {
-        const response = await axios.get(
-            `${API_BASE}/check/${curriculumId}/${year}`
+        const response = await axios.post(
+            `${API_BASE}/check/${curriculumId}/${year}`,
+            { courses: coursesData }
         );
-        console.log("Modules check response:", response.data);
         return response.data;
     } catch (err) {
         console.error("Error checking modules:", err);
         throw err;
     }
 }
-

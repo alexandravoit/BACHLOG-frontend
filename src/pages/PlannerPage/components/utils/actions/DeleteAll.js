@@ -1,21 +1,14 @@
 import { IconButton } from '@primer/react';
 import { TrashIcon } from '@primer/octicons-react';
 import { useCourse } from '../../../../../context';
-import {deleteAllCourses} from "../../../../../api/CoursesApi";
-
 
 function DeleteAll() {
 
-    const { loadAllCourses } = useCourse();
+    const { deleteAllCourses } = useCourse();
 
-    const handleDeleteAll = async () => {
+    const handleDeleteAll = () => {
         if (window.confirm('Kas olete kindel, et soovite kõik kursused kustutada?')) {
-            try {
-                await deleteAllCourses();
-                await loadAllCourses();
-            } catch (err) {
-                alert('Kursuste kustutamine ebaõnnestus.');
-            }
+            deleteAllCourses();
         }
     };
 

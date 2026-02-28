@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { FormControl, Select } from "@primer/react";
 import { getModuleOptions } from "../../../../../../api/ModulesApi";
-import { updateCourseModule } from "../../../../../../api/CoursesApi";
+import {useCourse} from "../../../../../../context";
 
-export default function ModuleSelector({ course, onModuleUpdated }) {
+export default function ModuleSelector({ course }) {
     const [modules, setModules] = useState([{ code: course.module, title: course.module }]);
     const [selected, setSelected] = useState(course.module || "");
+    const { updateCourse } = useCourse();
 
     useEffect(() => {
         const fetchModules = async () => {
@@ -23,10 +24,7 @@ export default function ModuleSelector({ course, onModuleUpdated }) {
         const newModule = event.target.value || null;
         setSelected(newModule);
         try {
-            await updateCourseModule(course.id, newModule);
-            if (onModuleUpdated) {
-                await onModuleUpdated(course.id);
-            }
+            await updateCourse(course.id, { module: newModule });
         } catch (err) {
             console.error("Failed to update module:", err);
         }

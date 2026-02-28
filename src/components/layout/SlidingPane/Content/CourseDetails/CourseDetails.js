@@ -10,7 +10,7 @@ import IssueAlert from "../../../../issue/IssueAlert";
 import CourseCurriculumSelector from "./utils/CourseCurriculumSelector";
 
 function CourseDetails({ course }) {
-    const { courses, getCourseIssues, refreshCourse } = useCourse();
+    const { courses, getCourseIssues } = useCourse();
     const courseData = courses[course.id] || course;
     const labels = getCourseLabels(courseData);
     const issues = getCourseIssues(courseData.id);
@@ -73,11 +73,11 @@ function CourseDetails({ course }) {
             <div className={styles.selectors}>
                 <div className={styles.selector}>
                     <Text size={'small'} weight={'semibold'}>Õppekava</Text>
-                    <CourseCurriculumSelector course={courseData} onCurriculumUpdated={refreshCourse} />
+                    <CourseCurriculumSelector course={courseData} />
                 </div>
                 <div className={styles.selector}>
                     <Text size={'small'} weight={'semibold'}>Moodul</Text>
-                    <ModuleSelector course={courseData} onModuleUpdated={refreshCourse} />
+                    <ModuleSelector course={courseData} />
                 </div>
             </div>
 

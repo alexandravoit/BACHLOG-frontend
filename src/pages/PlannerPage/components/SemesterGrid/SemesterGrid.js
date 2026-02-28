@@ -2,20 +2,13 @@ import { useEffect } from 'react';
 import SemesterBox from './SemesterBox.js';
 import styles from './SemesterGrid.module.css';
 import { groupCoursesBySemester, useDragAutoScroll } from '../../../../utils/CourseUtils.js';
-import {
-    createCourse,
-    updateCourseSemester,
-    getCourseSeason,
-    updateCourseSeason,
-    getCourseCurricula,
-    updateCourseCurriculum
-} from '../../../../api/CoursesApi.js';
+import { getCourseSeason, getCourseCurricula } from '../../../../api/CoursesApi.js';
 import { useCourse } from '../../../../context';
 
 
 function SemesterGrid() {
 
-    const { courses, refreshCourse, validateCourses } = useCourse();
+    const { courses, addCourse, updateCourse, validateCourses  } = useCourse();
 
     useEffect(() => {
         validateCourses();
@@ -39,10 +32,9 @@ function SemesterGrid() {
     const addCourseToSemester = async (targetSemesterId, course, sourceSemesterId) => {
         try {
             if (sourceSemesterId) {
-                await updateCourseSemester(course.id, targetSemesterId);
-                await refreshCourse(course.id);
+                await updateCourse(course.id, {semester: targetSemesterId});
             } else {
-                const newCourse = await createCourse({
+                const newCourse = await addCourse({
                     uuid: course.uuid,
                     semester: targetSemesterId,
                     code: course.code,
@@ -50,33 +42,19 @@ function SemesterGrid() {
                     credits: course.credits,
                 });
 
-                await refreshCourse(newCourse.id);
-                await updateNewCourseSeason(newCourse.id, course.code);
-                await updateNewCourseCurriculum(newCourse.id, course.uuid);
+                const [seasonInfo, curriculumInfo] = await Promise.all([
+                    getCourseSeason(course.code),
+                    getCourseCurricula(course.uuid)
+                ]);
+
+                await updateCourse(newCourse.id, {
+                    isAutumnCourse: seasonInfo.isAutumnCourse,
+                    isSpringCourse: seasonInfo.isSpringCourse,
+                    curriculum: curriculumInfo.default
+                });
             }
         } catch (error) {
             console.error('Failed to save course:', error);
-        }
-    };
-
-    const updateNewCourseSeason = async (courseId, courseCode) => {
-        try {
-            const seasonInfo = await getCourseSeason(courseCode);
-            await updateCourseSeason(courseId, seasonInfo);
-            await refreshCourse(courseId);
-        } catch (error) {
-            console.error("Background season update failed:", error);
-        }
-    };
-
-    const updateNewCourseCurriculum = async (courseId, courseUuid) => {
-        try {
-            const curriculumInfo = await getCourseCurricula(courseUuid);
-            const curriculum = curriculumInfo.default;
-            await updateCourseCurriculum(courseId, curriculum);
-            await refreshCourse(courseId);
-        } catch (error) {
-            console.error("Background curriculum update failed:", error);
         }
     };
 
