@@ -1,7 +1,9 @@
 import axios from 'axios';
 import { StorageService } from '../services/StorageService';
 
-const API_BASE = '/api/courses';
+const API_BASE = process.env.REACT_APP_API_URL
+    ? `${process.env.REACT_APP_API_URL}/api/courses`
+    : '/api/courses';
 
 // OIS API
 
