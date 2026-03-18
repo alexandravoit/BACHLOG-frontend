@@ -18,7 +18,7 @@ export const groupCoursesBySemester = (courses) => {
 export const groupCoursesByModule = (courses, modules) => {
     return modules.map((module) => {
         const moduleCourses = courses.filter(
-            (course) => course.module === module.code
+            (course) => (course.module ?? null) === module.code
         );
         const totalEap = moduleCourses.reduce(
             (sum, course) => sum + (course.credits || 0),
