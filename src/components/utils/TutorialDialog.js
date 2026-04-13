@@ -17,6 +17,7 @@ function TutorialDialog({ title, children }) {
                 aria-label="Info"
                 tooltipDirection="s"
                 onClick={handleClick}
+                sx={{ color: 'accent.fg' }}
             />
 
             {isOpen && (
