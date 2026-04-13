@@ -7,6 +7,7 @@
     --font-size-course: 8px;
     --font-size-header: 14px;
     --font-size-overlay: 14px;
+    --font-size-label: 10px;
 
     .issues {
         display: flex;
@@ -26,6 +27,7 @@
         --font-size-course: 7px;
         --font-size-header: 12px;
         --font-size-overlay: 12px;
+        --font-size-label: 8px;
     }
 }
 
@@ -40,6 +42,7 @@
         --font-size-course: 11px;
         --font-size-header: 19px;
         --font-size-overlay: 14px;
+        --font-size-label: 13px;
     }
 }
 
@@ -53,6 +56,7 @@
         --font-size-course: 13px;
         --font-size-header: 22px;
         --font-size-overlay: 16px;
+        --font-size-label: 15px;
     }
 }
 
@@ -66,5 +70,6 @@
         --font-size-course: 15px;
         --font-size-header: 25px;
         --font-size-overlay: 18px;
+        --font-size-label: 17px;
     }
 }

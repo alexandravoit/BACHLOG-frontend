@@ -42,6 +42,12 @@
     grid-template-columns: repeat(3, 1fr);
 }
 
+.labels {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+}
+
 @media (max-width: 920px) {
     .semesterGrid {
         grid-template-columns: repeat(2, 1fr);

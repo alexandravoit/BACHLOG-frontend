@@ -25,7 +25,20 @@ function SemesterBox({ semester, onCourseDrop, onCourseDrag }) {
     >
       <div className={styles.header}>
         <Text>{semester.name}</Text>
-        <Label variant="secondary">{semester.totalEap} EAP</Label>
+          <div className={styles.labels}>
+              <Label
+                  variant={semester.id % 2 !== 0 ? 'severe' : 'success'}
+                  sx={{ fontSize: 'var(--font-size-label)' }}
+              >
+                  {semester.id % 2 !== 0 ? 'Sügis' : 'Kevad'}
+              </Label>
+              <Label
+                  variant="secondary"
+                  sx={{ fontSize: 'var(--font-size-label)' }}
+              >
+                  {semester.totalEap} EAP
+              </Label>
+          </div>
       </div>
 
       <CourseGrid
