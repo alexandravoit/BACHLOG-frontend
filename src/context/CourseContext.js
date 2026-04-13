@@ -65,6 +65,7 @@ export const CourseProvider = ({ children }) => {
             setValidationResults(resultsById);
         } catch (error) {
             console.error('Validation failed:', error);
+            throw error;
         }
     }, [courses]);
 

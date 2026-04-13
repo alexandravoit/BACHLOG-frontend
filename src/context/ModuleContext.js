@@ -88,6 +88,7 @@ export const ModuleProvider = ({ children }) => {
             setWarnings(results.warnings || { misplaced: [], doubled: [] });
         } catch (error) {
             console.error("Module validation failed:", error);
+            throw error;
         }
     }, [selectedYear, courses]);
 
