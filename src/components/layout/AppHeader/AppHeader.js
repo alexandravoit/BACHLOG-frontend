@@ -1,5 +1,6 @@
 import { IconButton, Text } from '@primer/react';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { ThreeBarsIcon } from '@primer/octicons-react';
 import styles from './AppHeader.module.css'
 import { ReactComponent as BachlogLogo } from '../../../assets/logos/LOGO-minimal.svg';
@@ -28,7 +29,9 @@ function AppHeader() {
                 aria-label="Menüü"
                 onClick={() => setIsMenuOpen(true)}
             />
-            <BachlogLogo className={styles.logo} />
+            <Link to="/">
+                <BachlogLogo className={styles.logo} />
+            </Link>
             <Text weight='semibold'>BACHLOG</Text>
             <Text weight="semibold">/</Text>
             <Text weight="semibold">{currentTitle}</Text>
