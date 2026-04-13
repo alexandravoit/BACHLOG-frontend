@@ -14,20 +14,23 @@ function PlannerContent() {
 
     return (
         <div className={styles.plannerPage}>
-            <div className={styles.actions}>
-                <div className={styles.searchBox}>
-                    <SearchBox onSearchResults={setSearchResults} />
-                </div>
-                <div>
-                    <ActionMenu />
-                </div>
-            </div>
 
-            {searchResults.length > 0 && (
-                <div className={styles.searchResults}>
-                    <SearchResultBox courses={searchResults} />
+            <div className={styles.stickyArea}>
+                <div className={styles.actions}>
+                    <div className={styles.searchBox}>
+                        <SearchBox onSearchResults={setSearchResults} />
+                    </div>
+                    <div>
+                        <ActionMenu />
+                    </div>
                 </div>
-            )}
+
+                {searchResults.length > 0 && (
+                    <div className={styles.searchResults}>
+                        <SearchResultBox courses={searchResults} />
+                    </div>
+                )}
+            </div>
 
             <div className={styles.semesterGrid}>
                 <SemesterGrid />
