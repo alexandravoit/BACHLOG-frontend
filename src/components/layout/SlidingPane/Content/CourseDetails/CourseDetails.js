@@ -8,6 +8,7 @@ import ModuleSelector from "./utils/ModuleSelector";
 import DeleteCourse from "./utils/DeleteCourse";
 import IssueAlert from "../../../../issue/IssueAlert";
 import CourseCurriculumSelector from "./utils/CourseCurriculumSelector";
+import SemesterSelector from "./utils/SemesterSelector";
 
 function CourseDetails({ course }) {
     const { courses, getCourseIssues } = useCourse();
@@ -72,9 +73,15 @@ function CourseDetails({ course }) {
 
             <div className={styles.selectors}>
                 <div className={styles.selector}>
+                    <Text size={'small'} weight={'semibold'}>Semester</Text>
+                    <SemesterSelector course={courseData} />
+                </div>
+
+                <div className={styles.selector}>
                     <Text size={'small'} weight={'semibold'}>Õppekava</Text>
                     <CourseCurriculumSelector course={courseData} />
                 </div>
+
                 <div className={styles.selector}>
                     <Text size={'small'} weight={'semibold'}>Moodul</Text>
                     <ModuleSelector course={courseData} />
