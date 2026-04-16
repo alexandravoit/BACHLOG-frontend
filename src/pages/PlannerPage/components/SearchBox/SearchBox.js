@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { FormControl, TextInput } from '@primer/react';
 import { SearchIcon } from '@primer/octicons-react'
 import { searchCourses } from '../../../../api/CoursesApi.js';
@@ -8,6 +8,7 @@ function SearchBox({ onSearchResults }) {
 
     const [query, setQuery] = useState('');
     const [error, setError] = useState(null);
+    const latestRequest = useRef(0);
 
     const handleSearch = async (searchQuery) => {
         const trimmedQuery = searchQuery.trim();
@@ -18,10 +19,13 @@ function SearchBox({ onSearchResults }) {
             return;
         }
 
+        const requestId = ++latestRequest.current;
+
         setError(null);
 
         try {
             const results = await searchCourses(trimmedQuery);
+            if (requestId !== latestRequest.current) return;
             if (results.length === 0) setError('Kursuseid ei leitud!');
             onSearchResults(results);
         } catch (err) {
