@@ -25,7 +25,7 @@ export default function ModulesGuide() {
                 </Text>
                 <ul className={styles.list}>
                     <li>Kas kohustuslikud ained põhi- ja lõputöömoodulitest on plaani lisatud</li>
-                    <li>Kas mõni põhi-, lõputöö- või valikmooduli aine on määratud valesse moodulisse</li>
+                    <li>Kas mõni aine on määratud valesse moodulisse</li>
                     <li>Kas mõni aine on lisatud topelt</li>
                 </ul>
             </div>
@@ -46,7 +46,7 @@ export default function ModulesGuide() {
                 heading="Tähelepanu!"
                 message={
                     <>
-                        Mõnede moodulite puhul ennustab BACHLOG ka minimaalset nõutud EAP hulka, kuid see ei pruugi alati täpne olla.
+                        BACHLOG ennustab, mis kursused on eriala läbimiseks kohustuslikud, kuid see ei pruugi alati täpne olla.
                         Seetõttu on oluline plaan iseseisvalt üle kontrollida ning küsimuste korral külastada{' '}
                         <Link
                             href="https://ois2.ut.ee/#/curricula"

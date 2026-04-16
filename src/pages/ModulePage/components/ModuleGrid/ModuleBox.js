@@ -4,7 +4,7 @@ import {Label, Text, Tooltip} from "@primer/react";
 import React from "react";
 import IssueAlert from "../../../../components/issue/IssueAlert";
 
-function ModuleBox({ module, courses = [], issues = [], requiredEap = 0, onCourseDrag, onCourseDrop  }) {
+function ModuleBox({ module, courses = [], issues = [], onCourseDrag, onCourseDrop  }) {
 
     const totalEap = courses.reduce((sum, course) => sum + (course.credits || 0), 0);
 
@@ -69,24 +69,6 @@ function ModuleBox({ module, courses = [], issues = [], requiredEap = 0, onCours
                 </Tooltip>
             )}
 
-            {requiredEap !== 0 && (
-                <Tooltip text="Minimaalne EAP hulk" direction="s">
-                    <button
-                        type="button"
-                        style={{
-                            background: 'none',
-                            border: 'none',
-                            padding: 0,
-                            cursor: 'default'
-                        }}
-                    >
-                        <Label variant={'secondary'}>
-                            {requiredEap} EAP
-                        </Label>
-                    </button>
-                </Tooltip>
-            )}
-
             <Tooltip text="Planeeritud EAP hulk" direction="s">
                 <button
                     type="button"
@@ -97,7 +79,7 @@ function ModuleBox({ module, courses = [], issues = [], requiredEap = 0, onCours
                         cursor: 'default'
                     }}
                 >
-                    <Label variant={'primary'}>
+                    <Label variant={'secondary'}>
                         {totalEap} EAP
                     </Label>
                 </button>

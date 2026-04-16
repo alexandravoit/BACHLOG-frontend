@@ -39,7 +39,7 @@ function ModulesChecker() {
                 onClose={() => setIsOpen(false)}
                 title={checkFailed ? '❌ Kontroll ebaõnnestus' : 'Kontrolli tulemus'}
                 type={checkFailed ? 'danger' : hasIssues ? 'warning' : 'success'}
-                heading={checkFailed ? 'Kontroll ebaõnnestus.' : hasIssues ? 'Probleemid leitud!' : 'Probleeme ei leitud!'}
+                heading={checkFailed ? 'Kontroll ebaõnnestus.' : hasIssues ? 'Leitud probleemid!' : 'Probleeme ei leitud!'}
                 message={checkFailed ? '' : hasIssues ? 'Plaaniga seotud vead on nähtaval moodulite ülevaates.' : ''}
             />
         </div>
