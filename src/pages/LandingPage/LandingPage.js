@@ -7,6 +7,13 @@ import BacklogWithTooltip from "./components/BacklogWithTooltip";
 
 function LandingPage() {
 
+    const videoRef = React.useRef(null);
+
+    const handleOverviewClick = (e) => {
+        e.preventDefault();
+        videoRef.current?.scrollIntoView({ behavior: 'smooth' });
+    };
+
     return (
         <BrandTheme colorMode="auto">
             <AnimationProvider>
@@ -30,10 +37,10 @@ function LandingPage() {
 
                     <div className={styles.cards}>
                         <div>
-                            <Card ctaText="" href="/semesters" hasBorder fullWidth={true} >
-                                <Card.Heading>Kursused</Card.Heading>
+                            <Card ctaText="" href="#" hasBorder onClick={handleOverviewClick} fullWidth={true} >
+                                <Card.Heading>Ülevaade</Card.Heading>
                                 <Card.Description>
-                                    Otsi kursuseid. Saa infot nende kuuluvuse, eeldusainete ning toimumisaja kohta.
+                                    Vaata videot, mis tutvustab rakenduse BACHLOG põhifunktsioone.
                                 </Card.Description>
                             </Card>
                         </div>
@@ -42,7 +49,7 @@ function LandingPage() {
                             <Card ctaText="" href="/semesters" hasBorder fullWidth={true} >
                                 <Card.Heading>Semestrid</Card.Heading>
                                 <Card.Description>
-                                    Planeeri kursuseid semestrite kaupa. Kontrolli plaani korrektsust.
+                                    Otsi ja planeeri kursuseid semestrite kaupa. Kontrolli plaani korrektsust.
                                 </Card.Description>
                             </Card>
                         </div>
@@ -55,6 +62,25 @@ function LandingPage() {
                                 </Card.Description>
                             </Card>
                         </div>
+                    </div>
+
+                    <div ref={videoRef} className={styles.videoSection}>
+                        <iframe
+                            className={styles.video}
+                            src="https://www.youtube.com/embed/guY92nbSzPg"
+                            title="BACHLOG ülevaade"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                        />
+
+                        <a
+                            href="https://youtu.be/q8FUWZLRdMw"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={styles.englishLink}
+                        >
+                            Overview video in English available here!
+                        </a>
                     </div>
 
                     <Animate animate="fade-in">

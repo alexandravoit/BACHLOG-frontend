@@ -48,6 +48,32 @@
     padding: 0 !important;
 }
 
+.videoSection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+}
+
+.video {
+    width: 100%;
+    max-width: 800px;
+    aspect-ratio: 16 / 9;
+    border: none;
+    border-radius: 8px;
+}
+
+.englishLink {
+    font-size: 12px;
+    color: var(--fgColor-muted) !important;
+    text-decoration: none;
+}
+
+.englishLink:hover {
+    text-decoration: underline;
+}
+
 @keyframes textGlow {
     from {
         text-shadow: 0 0 0 var(--fgColor-default);
