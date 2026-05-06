@@ -7,7 +7,7 @@ export default function PlannerGuide() {
         <div className={styles.guide}>
             <Text as="p">
                 Semestrite vaates on võimalik planeerida Tartu Ülikooli õppeinfosüsteemi aineid 6 semestri vahel.
-                Kursuseid saab lisada ühekaupa, sisestades vastav ainekood lahtrisse <code>Kursuse otsing</code> ning
+                Kursuseid saab lisada ühekaupa, sisestades vastav ainekood või nimi lahtrisse <code>Kursuse otsing</code> ning
                 lohistades aine semestrisse 1-6.
             </Text>
 

@@ -10,7 +10,7 @@ const API_BASE = process.env.REACT_APP_API_URL
 export const searchCourses = async (query) => {
     try {
         const response = await axios.get(`${API_BASE}/search`, {
-            params: { q: query.toUpperCase() }
+            params: { q: query }
         });
         return response.data;
     } catch (error) {

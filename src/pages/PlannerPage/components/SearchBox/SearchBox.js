@@ -1,38 +1,37 @@
-import { useState, useRef } from "react";
+import {useState, useRef} from "react";
 import { FormControl, TextInput } from '@primer/react';
 import { SearchIcon } from '@primer/octicons-react'
 import { searchCourses } from '../../../../api/CoursesApi.js';
+import { debounce } from "lodash";
 import styles from './SearchBox.module.css'
 
 function SearchBox({ onSearchResults }) {
 
     const [query, setQuery] = useState('');
     const [error, setError] = useState(null);
-    const latestRequest = useRef(0);
 
-    const handleSearch = async (searchQuery) => {
-        const trimmedQuery = searchQuery.trim();
+    const handleSearch = useRef(
+        debounce(async (searchQuery) => {
+            const trimmedQuery = (searchQuery || "").trim();
 
-        if (!trimmedQuery || trimmedQuery.length < 2) {
-            onSearchResults([]);
+            if (!trimmedQuery || trimmedQuery.length < 2) {
+                onSearchResults([]);
+                setError(null);
+                return;
+            }
+
             setError(null);
-            return;
-        }
 
-        const requestId = ++latestRequest.current;
-
-        setError(null);
-
-        try {
-            const results = await searchCourses(trimmedQuery);
-            if (requestId !== latestRequest.current) return;
-            if (results.length === 0) setError('Kursuseid ei leitud!');
-            onSearchResults(results);
-        } catch (err) {
-            setError('Kursuseid ei leitud!');
-            onSearchResults([]);
-        }
-    };
+            try {
+                const results = await searchCourses(trimmedQuery);
+                if (results.length === 0) setError('Kursuseid ei leitud!');
+                onSearchResults(results);
+            } catch (err) {
+                setError('Kursuseid ei leitud!');
+                onSearchResults([]);
+            }
+        }, 100)
+    ).current;
 
     const handleInputChange = (event) => {
         const value = event.target.value;
